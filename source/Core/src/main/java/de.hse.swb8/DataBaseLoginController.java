@@ -1,7 +1,6 @@
 package de.hse.swb8;
 
 import de.hse.swb8.observer.SimpleObservable;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

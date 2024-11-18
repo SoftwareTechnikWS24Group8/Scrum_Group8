@@ -5,7 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SimpleObservable<T> implements Observable<T> {
     private boolean changed = false;
-    private List<Observer<T>> observers;
+    private final List<Observer<T>> observers;
 
     public SimpleObservable(){
         observers = new CopyOnWriteArrayList<>();
