@@ -7,6 +7,14 @@
         <groupId>de.hse.swb8</groupId>
         <version>${revision}</version>
     </parent>
+    <dependencies>
+        <dependency>
+            <groupId>de.hse.swb8</groupId>
+            <artifactId>scrumgroup8core</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>scrumgroup8checkin</artifactId>
