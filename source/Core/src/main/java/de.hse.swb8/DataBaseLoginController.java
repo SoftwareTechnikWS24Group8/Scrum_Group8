@@ -9,16 +9,19 @@ import javafx.scene.control.TextField;
 
 public class DataBaseLoginController extends SimpleObservable<String> {
 
-    private static String SEPERATOR = "--AA__";
+    private static final String SEPERATOR = "--AA__";
     @FXML
     private TextField txtUser;
     @FXML
     private TextField txtPassword;
     @FXML
     private TextField txtUrl;
-
     @FXML
     private Label lblErrorMessage;
+
+    public void setErrorText(String msg) {
+        lblErrorMessage.setText(msg);
+    }
 
     @FXML
     void OnLoginButtonPressed(ActionEvent event) {
