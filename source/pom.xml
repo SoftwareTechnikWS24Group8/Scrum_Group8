@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.hse.swb8</groupId>
+    <artifactId>scrumgroup8</artifactId>
+    <packaging>pom</packaging>
+    <version>${revision}</version>
+    <name>ScrumGroup8</name>
+    <description>HS-Esslingen Software Engineering (SWB3) Scrum Project Group 8</description>
+    <url>https://github.com/Braincrushy/ScrumGroup8</url>
+
+    <modules>
+        <module>Core</module>
+        <module>Admin</module>
+        <module>CheckIn</module>
+        <module>CheckOut</module>
+        <module>Pay</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>de.hse.swb8</groupId>
+                <artifactId>core</artifactId>
+                <version>${revision}</version>
+                <scope>compile</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <developers>
+        <developer>
+            <id>JanSchroeter</id>
+            <name>Jan Schroeter</name>
+            <email>jascit07@hs-esslingen.de </email>
+            <url>https://github.com/Braincrushy</url>
+            <timezone>Germany</timezone>
+        </developer>
+        <developer>
+            <id>VinzenzHassert</id>
+            <name>Vinzenz Hassert</name>
+            <email>vihait00@hs-esslingen.de</email>
+            <url>https://github.com/Zeanon</url>
+            <timezone>Germany</timezone>
+        </developer>
+        <developer>
+            <id>JanRöhrle</id>
+            <name>Jan Röhrle</name>
+            <email>jaroit00@hs-esslingen.de</email>
+            <url>https://github.com/Janroehrle</url>
+            <timezone>Germany</timezone>
+        </developer>
+        <developer>
+            <id>KimHofmann</id>
+            <name>Kim Hofmann</name>
+            <email>kihoit00@hs-esslingen.de</email>
+            <url>https://github.com/ReonDev</url>
+            <timezone>Germany</timezone>
+        </developer>
+        <developer>
+            <id>Benjamin Supke</id>
+            <name>Benjamin Supke</name>
+            <email>besuit00@hs-esslingen.de</email>
+            <url>https://github.com/Benni15</url>
+            <timezone>Germany</timezone>
+        </developer>
+        <developer>
+            <id>NilsRichter</id>
+            <name>Nils Richter</name>
+            <email>niriit00@hs-esslingen.de</email>
+            <url>https://github.com/Nils2k3</url>
+            <timezone>Germany</timezone>
+        </developer>
+    </developers>
+
+    <properties>
+        <revision>1.0</revision>
+
+        <maven.test.skip>false</maven.test.skip>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.2</junit.version>
+    </properties>
+
+    <scm>
+        <connection>scm:git:git://github.com/Braincrushy/ScrumGroup8.git</connection>
+        <developerConnection>scm:git:ssh://github.com/Braincrushy/ScrumGroup8.git</developerConnection>
+        <url>//github.com/Braincrushy/ScrumGroup8</url>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>21.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dlsc.formsfx</groupId>
+            <artifactId>formsfx-core</artifactId>
+            <version>11.6.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.synedra</groupId>
+            <artifactId>validatorfx</artifactId>
+            <version>0.5.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.bootstrapfx</groupId>
+            <artifactId>bootstrapfx-core</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.hansolo</groupId>
+            <artifactId>tilesfx</artifactId>
+            <version>21.0.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.almasb</groupId>
+            <artifactId>fxgl</artifactId>
+            <version>17.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JetBrains -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>17.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>clean verify -U</defaultGoal>
+        <finalName>${project.name}</finalName>
+
+        <pluginManagement>
+            <plugins>
+                <!-- Site Plugin -->
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.8.2</version>
+                </plugin>
+
+                <!-- JavaDoc -->
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+
+                <!-- SCM Plugin -->
+                <plugin>
+                    <artifactId>maven-scm-publish-plugin</artifactId>
+                    <version>1.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+
+                <!-- JavaFX Plugin -->
+                <plugin>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-maven-plugin</artifactId>
+                    <version>0.0.8</version>
+                    <executions>
+                        <execution>
+                            <!-- Default configuration for running with: mvn clean javafx:run -->
+                            <id>default-cli</id>
+                            <configuration>
+                                <mainClass>de.hse.swb8.ScrumGroup8/de.hse.swb8.ScrumGroup8.MainEntryPoint
+                                </mainClass>
+                                <launcher>app</launcher>
+                                <jlinkZipName>app</jlinkZipName>
+                                <jlinkImageName>app</jlinkImageName>
+                                <noManPages>true</noManPages>
+                                <stripDebug>true</stripDebug>
+                                <noHeaderFiles>true</noHeaderFiles>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Surefire Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <configuration>
+                        <parallel>methods</parallel>
+                        <threadCount>10</threadCount>
+                    </configuration>
+                </plugin>
+
+                <!-- Jar Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.4.2</version>
+                    <configuration>
+                        <archive>
+                            <addMavenDescriptor>false</addMavenDescriptor>
+                            <manifestEntries>
+                                <Manifest-Version>${project.version}</Manifest-Version>
+                                <Built-By>${project.name} Development Team</Built-By>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </plugin>
+
+                <!-- Ressources Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
