@@ -10,7 +10,7 @@
     <version>${revision}</version>
     <name>ScrumGroup8</name>
     <description>HS-Esslingen Software Engineering (SWB3) Scrum Project Group 8</description>
-    <url>https://github.com/Braincrushy/ScrumGroup8</url>
+    <url>https://github.com/SoftwareTechnikWS24Group8/Scrum_Group8</url>
 
     <modules>
         <module>Core</module>
@@ -19,6 +19,16 @@
         <module>CheckOut</module>
         <module>Pay</module>
     </modules>
+
+    <properties>
+        <revision>1.0</revision>
+
+        <maven.test.skip>false</maven.test.skip>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.2</junit.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -76,27 +86,17 @@
         </developer>
     </developers>
 
-    <properties>
-        <revision>1.0</revision>
-
-        <maven.test.skip>false</maven.test.skip>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.10.2</junit.version>
-    </properties>
-
     <scm>
-        <connection>scm:git:git://github.com/Braincrushy/ScrumGroup8.git</connection>
-        <developerConnection>scm:git:ssh://github.com/Braincrushy/ScrumGroup8.git</developerConnection>
-        <url>//github.com/Braincrushy/ScrumGroup8</url>
+        <connection>scm:git:git://github.com/SoftwareTechnikWS24Group8/Scrum_Group8.git</connection>
+        <developerConnection>scm:git:ssh://github.com/SoftwareTechnikWS24Group8/Scrum_Group8.git</developerConnection>
+        <url>//github.com/SoftwareTechnikWS24Group8/Scrum_Group8</url>
     </scm>
 
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.15.0</version> <!-- Replace with the latest version -->
+            <version>2.15.0</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
