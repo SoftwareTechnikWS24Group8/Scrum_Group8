@@ -1,4 +1,4 @@
-﻿package de.hse.swb8;
+package de.hse.swb8;
 
 public class CheckOutCoreSystem {
 }

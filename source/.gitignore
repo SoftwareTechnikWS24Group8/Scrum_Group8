@@ -515,8 +515,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-/Pay/target/**
-/Core/target/**
-/CheckOut/target/**
-/CheckIn/target/**
-/Admin/target/**
+/**/target/
