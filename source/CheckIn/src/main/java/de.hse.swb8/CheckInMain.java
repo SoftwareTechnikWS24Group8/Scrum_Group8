@@ -14,5 +14,6 @@ public class CheckInMain extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         CheckInCoreSystem coreSystem = new CheckInCoreSystem();
+        System.out.println("test");
     }
 }

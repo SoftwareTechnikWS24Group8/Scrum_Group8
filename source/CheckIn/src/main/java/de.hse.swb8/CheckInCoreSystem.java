@@ -10,9 +10,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.List;
 
-public class CheckInCoreSystem  implements Observer<VehicleType> {
+
+public class CheckInCoreSystem implements Observer<VehicleType> {
 
     CheckInController controller;
     CheckInDB db;
@@ -21,18 +21,17 @@ public class CheckInCoreSystem  implements Observer<VehicleType> {
         // Start DataBaseLogin
 
         // Give StartUp(message) as callback
+        StartUp(new DataBaseInfo("ters","",""));
+        //DataBaseLogin dblogin = new DataBaseLogin();
+        //Callback callback = (message) -> StartUp(message);
 
-        DataBaseLogin dblogin = new DataBaseLogin();
-
-        Callback callback = (message) -> StartUp(message);
-
-        dblogin.LoginIntoDataBase(callback);
+        //dblogin.LoginIntoDataBase(callback);
     }
 
     private void StartUp(DataBaseInfo info)
     {
-        DataBaseLogin.ValidateDataBaseInfo(info);
-        db = new CheckInDB(info);
+        //DataBaseLogin.ValidateDataBaseInfo(info);
+        //db = new CheckInDB(info);
 
         // Start CheckInUI
         try {
