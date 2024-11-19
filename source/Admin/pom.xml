@@ -73,7 +73,7 @@
                         <phase>clean</phase>
                         <configuration>
                             <groupId>de.hse.swb8</groupId>
-                            <artifactId>core</artifactId>
+                            <artifactId>scrumgroup8core</artifactId>
                             <version>${revision}</version>
                             <file>src/main/resources/dependencies/scrumgroup8core.jar</file>
                             <packaging>jar</packaging>
