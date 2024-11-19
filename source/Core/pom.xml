@@ -60,5 +60,86 @@
     <build>
         <defaultGoal>clean verify -U</defaultGoal>
         <finalName>${project.name}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>moveFilesToAdmin</id>
+                        <phase>verify</phase>
+                        <configuration>
+                            <target>
+                                <copy todir="${basedir}/../Admin/src/main/resources/dependencies"
+                                      flatten="true" overwrite="true"
+                                      verbose="true" failonerror="true">
+                                    <fileset dir="${basedir}/target"
+                                             includes="${project.build.finalName}.jar"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>moveFilesToCheckIn</id>
+                        <phase>verify</phase>
+                        <configuration>
+                            <target>
+                                <copy todir="${basedir}/../CheckIn/src/main/resources/dependencies"
+                                      flatten="true" overwrite="true"
+                                      verbose="true" failonerror="true">
+                                    <fileset dir="${basedir}/target"
+                                             includes="${project.build.finalName}.jar"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>moveFilesToCheckOut</id>
+                        <phase>verify</phase>
+                        <configuration>
+                            <target>
+                                <copy todir="${basedir}/../CheckOut/src/main/resources/dependencies"
+                                      flatten="true" overwrite="true"
+                                      verbose="true" failonerror="true">
+                                    <fileset dir="${basedir}/target"
+                                             includes="${project.build.finalName}.jar"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>moveFilesToPay</id>
+                        <phase>verify</phase>
+                        <configuration>
+                            <target>
+                                <copy todir="${basedir}/../Pay/src/main/resources/dependencies"
+                                      flatten="true" overwrite="true"
+                                      verbose="true" failonerror="true">
+                                    <fileset dir="${basedir}/target"
+                                             includes="${project.build.finalName}.jar"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>

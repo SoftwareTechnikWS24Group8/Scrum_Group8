@@ -60,5 +60,31 @@
     <build>
         <defaultGoal>clean verify -U</defaultGoal>
         <finalName>${project.name}</finalName>
+
+        <plugins>
+            <!-- Install Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <executions>
+                    <execution>
+                        <id>install-core</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <groupId>de.hse.swb8</groupId>
+                            <artifactId>core</artifactId>
+                            <version>${revision}</version>
+                            <file>src/main/resources/dependencies/scrumgroup8core.jar</file>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
