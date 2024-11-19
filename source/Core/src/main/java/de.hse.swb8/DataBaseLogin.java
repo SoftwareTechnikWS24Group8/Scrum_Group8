@@ -10,6 +10,9 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DataBaseLogin implements Observer<String> {
 
@@ -40,10 +43,23 @@ public class DataBaseLogin implements Observer<String> {
         }
     }
 
-    public boolean ValidateDataBaseInfo(DataBaseInfo info)
+    public static boolean ValidateDataBaseInfo(DataBaseInfo info)
     {
-        //TODO
-         return true;
+        // Load the database driver if required (for older JDBC versions).
+        // For newer JDBC versions, the driver is auto-registered.
+        try (Connection connection = DriverManager.getConnection(info.url(), info.userName(), info.password())) {
+            // If we reach here, the connection is successful
+            System.out.println("Connection successful!");
+            return true;
+        } catch (SQLException e) {
+            // Handle specific SQL exceptions
+            if (e.getSQLState().equals("28000")) { // Invalid authorization
+                System.out.println("Invalid credentials: " + e.getMessage());
+            } else {
+                System.out.println("Database connection error: " + e.getMessage());
+            }
+            return false;
+        }
     }
 
     private DataBaseLoginController controller;
