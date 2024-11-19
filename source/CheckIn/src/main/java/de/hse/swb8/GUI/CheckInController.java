@@ -37,7 +37,7 @@ public class CheckInController extends SimpleObservable<VehicleType> {
 
     @FXML private TableView tablePrices; //TODO make real
 
-    public void PopulatePrices(String[] vehicleNames,List<String> headers, List<List<String>> priceList+)
+    public void PopulatePrices(String[] vehicleNames,List<String> headers, List<List<String>> priceList)
     {
         //TODO Set Table rows with the data
     }

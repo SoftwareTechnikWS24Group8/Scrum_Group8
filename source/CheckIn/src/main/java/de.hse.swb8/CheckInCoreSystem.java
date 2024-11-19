@@ -60,7 +60,7 @@ public class CheckInCoreSystem  implements Observer<VehicleType> {
         controller.UpdateTableView(spots);}
 
     private void PopulatePrices(){
-        controller.PopulatePrices(vehicleNames, headers, priceList);
+        //controller.PopulatePrices(vehicleNames, headers, priceList);
     }
 
     @Override
