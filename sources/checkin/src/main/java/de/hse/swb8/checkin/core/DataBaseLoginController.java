@@ -26,11 +26,7 @@ public class DataBaseLoginController extends SimpleObservable<DataBaseInfo> {
     @FXML
     void OnLoginButtonPressed(ActionEvent event) {
 
-         String dataBaseURL = "jdbc:postgresql://46.223.191.31:5432/DataBase";
-         String dataBaseUser = "dbuserDefault";
-         String dataBasePass = "dbpasswordwaterfall8";
-
-        DataBaseInfo dbinfo = new DataBaseInfo(dataBaseURL,dataBaseUser,dataBasePass);
+        DataBaseInfo dbinfo = new DataBaseInfo(txtUrl.getText(),txtUser.getText(),txtPassword.getText());
 
         this.setChanged();
         this.notifyObservers(dbinfo);
