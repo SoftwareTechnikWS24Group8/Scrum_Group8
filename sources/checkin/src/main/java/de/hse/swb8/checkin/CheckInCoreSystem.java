@@ -29,8 +29,8 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
 
     private void StartUp(DataBaseInfo info)
     {
-        //DataBaseLogin.ValidateDataBaseInfo(info);
-        //db = new CheckInDB(info);
+        DataBaseLogin.ValidateDataBaseInfo(info);
+        db = new CheckInDB(info);
 
         // Start CheckInUI
         try {
@@ -49,13 +49,16 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
             e.printStackTrace();
         }
 
-        //PopulateVehicleSelection();
+        PopulateVehicleSelection();
         //PopulatePrices();
     }
 
     private void PopulateVehicleSelection() {
-        VehicleTypeSpotsInfo[] spots = db.GetParkInfos();
-        controller.UpdateTableView(spots);}
+        VehicleType[] vehicleTypes = db.GetVehicleTypes();
+        controller.UpdateDropDownSelection(vehicleTypes);
+        //VehicleTypeSpotsInfo[] spots = db.GetParkInfos();
+        //controller.UpdateTableView(spots);
+        }
 
     private void PopulatePrices(){
         //controller.PopulatePrices(vehicleNames, headers, priceList);

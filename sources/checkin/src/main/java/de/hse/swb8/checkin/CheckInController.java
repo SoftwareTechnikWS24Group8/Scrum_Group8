@@ -2,12 +2,15 @@ package de.hse.swb8.checkin;
 
 import de.hse.swb8.checkin.core.Enums.VehicleType;
 import de.hse.swb8.checkin.core.observer.SimpleObservable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CheckInController extends SimpleObservable<VehicleType> {
@@ -59,10 +62,24 @@ public class CheckInController extends SimpleObservable<VehicleType> {
     }
 
     @FXML
-    private void OnBuyTicketPressed(ActionEvent event)
+    private void OnBtnDriveInPressed(ActionEvent event)
     {
         VehicleType selectedVehicle = new VehicleType(1,"",""); //TODO make real
         notifyObservers();
     }
 
+    @FXML
+    private ChoiceBox<String> dpdVehicleChoice;
+
+    public void UpdateDropDownSelection(VehicleType[] vehicleTypes) {
+        // Extract display names from the array of VehicleType
+        ObservableList<String> displayNames = FXCollections.observableArrayList(
+                Arrays.stream(vehicleTypes)
+                        .map(VehicleType::displayName) // Extract displayName from each VehicleType
+                        .toList()                      // Convert the Stream to a List
+        );
+
+        // Set the items of the ChoiceBox
+        dpdVehicleChoice.setItems(displayNames);
+    }
 }
