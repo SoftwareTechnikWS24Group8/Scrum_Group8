@@ -21,17 +21,20 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
 
     Callback callback;
 
+    private static final String DIRECTORY_NAME = "ParkingLot";
     private static final String DATABASE_SAVE_FILE_NAME = "Scrum_DataBase";
 
+    String databaseSaveFile;
     public DataBaseLogin() {return;}
 
     public void LoginIntoDataBase(Callback onComplete)
     {
         callback = onComplete;
-        String tempDir = System.getProperty("java.io.tmpdir");
-        String filePath = tempDir + File.separator + DATABASE_SAVE_FILE_NAME;
+        String tempDir = System.getProperty("user.home") + File.separator +DIRECTORY_NAME;
 
-        DataBaseInfo info = JSONHandler.readDataBaseInfo(filePath);
+        databaseSaveFile = tempDir + File.separator + DATABASE_SAVE_FILE_NAME;
+
+        DataBaseInfo info = JSONHandler.readDataBaseInfo(databaseSaveFile);
 
         if(info != null && ValidateDataBaseInfo(info))
         {
@@ -103,9 +106,12 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
             controller.setErrorText("DataBaseNotValid");
             return;
         }
-        String tempDir = System.getProperty("java.io.tmpdir");
-        String filePath = tempDir + File.separator + DATABASE_SAVE_FILE_NAME;
-        JSONHandler.saveDataBaseInfo(newValue,filePath);
+        if(databaseSaveFile == null)
+        {
+            System.out.println("ERROR: databasesavefile path was not set but requested");
+            System.exit(2);
+        }
+        JSONHandler.saveDataBaseInfo(newValue,databaseSaveFile);
         callback.execute(newValue);
     }
 
@@ -114,9 +120,24 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
         private static final ObjectMapper objectMapper = new ObjectMapper();
 
         public static void saveDataBaseInfo(DataBaseInfo info, String filePath) {
+            System.out.println("fil" + filePath);
             try {
-                objectMapper.writeValue(new File(filePath), info);
-                System.out.println("DataBaseInfo saved to " + filePath + ".json");
+                File file = new File(filePath + ".json");
+                File parentDirectory = file.getParentFile();
+
+                // Check if the parent directory exists; if not, create it
+                if (parentDirectory != null && !parentDirectory.exists()) {
+                    if (parentDirectory.mkdirs()) {
+                        System.out.println("Directories created successfully: " + parentDirectory.getAbsolutePath());
+                    } else {
+                        System.err.println("Failed to create directories: " + parentDirectory.getAbsolutePath());
+                    }
+                }
+
+                // Write the JSON file, overriding it if it already exists
+                System.out.println("Writing file to " + file.getAbsolutePath());
+                objectMapper.writeValue(file, info);
+                System.out.println("DataBaseInfo saved to " + file.getAbsolutePath());
             } catch (IOException e) {
                 System.err.println("Error saving DataBaseInfo: " + e.getMessage());
             }
@@ -125,6 +146,11 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
         // Read DataBaseInfo from JSON
         public static DataBaseInfo readDataBaseInfo(String filePath) {
             try {
+                System.out.println("ReadFile " + filePath + ".json");
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.findAndRegisterModules(); // Automatically registers support for Java 16+ features
+
                 return objectMapper.readValue(new File(filePath + ".json"), DataBaseInfo.class);
             } catch (IOException e) {
                 System.err.println("Error reading DataBaseInfo: " + e.getMessage());

@@ -49,8 +49,8 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
             e.printStackTrace();
         }
 
-        PopulateVehicleSelection();
-        PopulatePrices();
+        //PopulateVehicleSelection();
+        //PopulatePrices();
     }
 
     private void PopulateVehicleSelection() {

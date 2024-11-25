@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 
 public class DataBaseLoginController extends SimpleObservable<DataBaseInfo> {
 
-    private static final String SEPERATOR = "--AA__";
     @FXML
     private TextField txtUser;
     @FXML
@@ -27,17 +26,11 @@ public class DataBaseLoginController extends SimpleObservable<DataBaseInfo> {
     @FXML
     void OnLoginButtonPressed(ActionEvent event) {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(txtUser.getText());
-        sb.append(txtPassword.getText());
-        sb.append(txtUrl.getText());
-        if(sb.toString().contains(SEPERATOR))
-        {
-            lblErrorMessage.setText("No entry can contain: " + SEPERATOR);
-            return;
-        }
+         String dataBaseURL = "jdbc:postgresql://46.223.191.31:5432/DataBase";
+         String dataBaseUser = "dbuserDefault";
+         String dataBasePass = "dbpasswordwaterfall8";
 
-        DataBaseInfo dbinfo = new DataBaseInfo(txtUrl.getText(),txtUser.getText(),txtPassword.getText());
+        DataBaseInfo dbinfo = new DataBaseInfo(dataBaseURL,dataBaseUser,dataBasePass);
 
         this.setChanged();
         this.notifyObservers(dbinfo);
