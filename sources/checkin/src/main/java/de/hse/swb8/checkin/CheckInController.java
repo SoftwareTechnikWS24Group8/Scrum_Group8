@@ -31,7 +31,8 @@ public class CheckInController extends SimpleObservable<VehicleType> {
 
     public VehicleType GetCurrentlySelectedVehicle()
     {
-        return VehicleType.C_Class;
+        //TODO implement
+        return new VehicleType(1,"","");
     }
 
     @FXML private TableView tablePrices; //TODO make real
@@ -52,7 +53,7 @@ public class CheckInController extends SimpleObservable<VehicleType> {
         get selected vehicle type
          */
 
-        VehicleType selectedVehicle = VehicleType.Default;
+        VehicleType selectedVehicle = new VehicleType(1,"","");
         setChanged();
         notifyObservers(selectedVehicle);
     }
@@ -60,7 +61,7 @@ public class CheckInController extends SimpleObservable<VehicleType> {
     @FXML
     private void OnBuyTicketPressed(ActionEvent event)
     {
-        VehicleType selectedVehicle = VehicleType.Default; //TODO make real
+        VehicleType selectedVehicle = new VehicleType(1,"",""); //TODO make real
         notifyObservers();
     }
 

@@ -2,6 +2,7 @@ package de.hse.swb8.checkin.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.hse.swb8.checkin.CheckInCoreSystem;
+import de.hse.swb8.checkin.CheckInMain;
 import de.hse.swb8.checkin.core.observer.Observable;
 import de.hse.swb8.checkin.core.observer.Observer;
 import javafx.fxml.FXMLLoader;
@@ -78,7 +79,7 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
         System.out.println("Starting window");
         try {
             Stage stage = new Stage();  // Create a new stage (window)
-            FXMLLoader fxmlLoader = new FXMLLoader(CheckInCoreSystem.class.getResource("DataBaseLogin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(CheckInMain.class.getResource("DataBaseLogin.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             stage.setResizable(false);

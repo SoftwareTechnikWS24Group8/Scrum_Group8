@@ -30,8 +30,6 @@ public class DataBaseLoginController extends SimpleObservable<DataBaseInfo> {
 
         this.setChanged();
         this.notifyObservers(dbinfo);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
 
     }
 
