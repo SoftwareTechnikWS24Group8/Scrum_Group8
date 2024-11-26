@@ -16,7 +16,10 @@ import java.util.Dictionary;
 import java.util.Enumeration;
 
 
-public class CheckOutCoreSystem implements Observer<CheckOutState> {
+public class CheckOutCoreSystem implements Observer<String> {
+
+    private static final float TIME_AFTER_PAYMENT = 0.17f; // ~10 Minunten
+
 
     CheckOutController controller;
     CheckOutDB db;
@@ -36,11 +39,11 @@ public class CheckOutCoreSystem implements Observer<CheckOutState> {
         // Start payUI
         try {
             Stage stage = new Stage();  // Create a new stage (window)
-            FXMLLoader fxmlLoader = new FXMLLoader(CheckOutCoreSystem.class.getResource("Pay.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(CheckOutCoreSystem.class.getResource("CheckOut.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 750 , 550);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
-            stage.setTitle("Pay Window");
+            stage.setTitle("CheckOut Window");
             stage.setScene(scene);
             stage.show();
 
@@ -55,46 +58,31 @@ public class CheckOutCoreSystem implements Observer<CheckOutState> {
 
 
     @Override
-    public void update(Observable<CheckOutState> observable, CheckOutState selectedVehicle) {
+    public void update(Observable<String> observable, String ticketId) {
 
-        if(!selectedVehicle.payed())
+        if(db.DoesTicketExistValid(ticketId))
         {
-            if(db.DoesTicketExistValid(selectedVehicle.ticket_id()))
-            {
-                controller.SetPriceText(GetPrice(selectedVehicle.ticket_id())+"");
-            }else {
-                controller.SetInfoText("Dieses Ticket existiert nicht");
+            if(db.HasTicketBeenPayed(ticketId)) {
+                float timer_after_payment = db.getHoursBetweenStampFromTicketAndNow(ticketId);
+
+                if (timer_after_payment > TIME_AFTER_PAYMENT) {
+                    controller.SetInfoText("Zeit überschreitung zahle erneut");
+                } else {
+                    controller.SetInfoText("GuteFahrt");
+                    System.out.println("Schranke Auf _------------");
+                    db.SetCheckoutTime(ticketId);
+
+                    float already_payed = db.GetAlreadyPayedMoney(ticketId);
+                    System.out.println(already_payed);
+                    db.AddRowToPayedList(ticketId, already_payed);
+                }
+            }
+            else {
+                controller.SetInfoText("Dieses Ticket wurde nicht bezahlt" );
             }
         }else {
-            db.SetPayed(selectedVehicle.ticket_id(),selectedVehicle.priceInEuro());
-        }
-    }
-
-    private float GetPrice(String ticket_id)
-    {
-        VehicleType type = db.GetVehicleTypeFromTicketID(ticket_id);
-        Dictionary<Float,Float> prices = db.GetPriceList(type);
-
-        float timeParked = db.getHoursBetweenStampFromTicketAndNow(ticket_id);
-        float alreadyPayed = db.GetAlreadyPayedMoney(ticket_id);
-
-        Float applicablePrice = getPriceForTimeParked(prices, timeParked);
-
-        return applicablePrice- alreadyPayed;
-    }
-
-    private static Float getPriceForTimeParked(Dictionary<Float, Float> prices, float timeParked) {
-        Float highestHour = null;
-
-        Enumeration<Float> keys = prices.keys(); // Get all hours
-        while (keys.hasMoreElements()) {
-            Float hour = keys.nextElement();
-            if (hour <= timeParked && (highestHour == null || hour > highestHour)) {
-                highestHour = hour; // Update if it's closer to timeParked but still <= timeParked
-            }
+            controller.SetInfoText("Dieses Ticket exisitert nicht" );
         }
 
-        // Return the corresponding price, or null if no valid hour is found
-        return highestHour != null ? prices.get(highestHour) : null;
     }
 }

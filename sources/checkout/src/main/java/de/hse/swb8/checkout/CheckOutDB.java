@@ -38,60 +38,8 @@ public class CheckOutDB extends DataBaseCore {
     return isActive;
     }
 
-    public VehicleType GetVehicleTypeFromTicketID(String Ticket_id)
-    {
-        VehicleType type = null;
-        String query = "SELECT * FROM scrum.park_list WHERE ticket_name = ?";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            // Set the ticket_name parameter
-            preparedStatement.setString(1, Ticket_id);
-
-            // Execute the query
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    // Get the count from the result
-                    int count = resultSet.getInt("vehicle_type_id");
-                    type = new VehicleType(count, "");
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error checking active ticket", e);
-        }
-        return type;
-    }
-
-
-    public Dictionary<Float,Float> GetPriceList(VehicleType selectedVehicle)
-    {
-        Dictionary<Float,Float> list = new Hashtable<>();
-        try {
-            try (Statement statement = connection.createStatement()) {
-
-                String query = "SELECT t.time_hours, v.price " +
-                        "FROM scrum.hours_list t " +
-                        "JOIN scrum.price_list v ON t.id = v.duration_id " +
-                        "WHERE v.vehicle_type_id =" + selectedVehicle.id();
-                ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()) {
-                    list.put(resultSet.getFloat("time_hours"),resultSet.getFloat("price"));
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        if(list.isEmpty())
-        {
-            System.out.println("No rows found");
-            System.exit(1);
-        }
-        // 3 hours > 2.3€
-        return list;
-    }
-
     public float getHoursBetweenStampFromTicketAndNow(String ticket) {
-        String query = "SELECT stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";
+        String query = "SELECT pay_time FROM scrum.park_list WHERE ticket_name = ?";
         Timestamp stampIn;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -102,7 +50,7 @@ public class CheckOutDB extends DataBaseCore {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     // Retrieve the timestamps
-                    stampIn = resultSet.getTimestamp("stamp_in_time");
+                    stampIn = resultSet.getTimestamp("pay_time");
 
                 } else {
                     throw new RuntimeException("No record found for the provided ticket: " + ticket);
@@ -122,30 +70,6 @@ public class CheckOutDB extends DataBaseCore {
         return millisecondsDifference / (1000f * 60 * 60); // Convert milliseconds to hours as a float
     }
 
-    public void SetPayed(String ticket_id , float payed_amount)
-    {
-        String query = "UPDATE scrum.park_list SET has_payed = ?, pay_time = ?, payed_amount = ? WHERE ticket_name = ?";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            // Set the parameters
-            preparedStatement.setBoolean(1, true); // Set has_payed to true
-            preparedStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis())); // Set payed_time to current time
-            preparedStatement.setFloat(3, payed_amount); // Set payed_time to current time
-            preparedStatement.setString(4, ticket_id); // Specify the ticket_name
-
-            // Execute the update
-            int affectedRows = preparedStatement.executeUpdate();
-
-            // Check if the update was successful
-            if (affectedRows == 0) {
-                throw new RuntimeException("No rows were updated. Ticket not found: " + ticket_id);
-            } else {
-                System.out.println("Payment updated successfully for ticket: " + ticket_id);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error updating payment status for ticket: " + ticket_id, e);
-        }
-    }
 
     public float GetAlreadyPayedMoney(String ticketId) {
 
@@ -172,9 +96,31 @@ public class CheckOutDB extends DataBaseCore {
         return payed_amount;
     }
 
-    /*
-    //TODO move into checkout
-    public void addRowToPayedList(String ticket, float payedInEuro) {
+    public void SetCheckoutTime(String tickedId) {
+
+        String query = "UPDATE scrum.park_list SET stamp_out_time = ? WHERE ticket_name = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            // Set the parameters
+            preparedStatement.setTimestamp(1, new Timestamp(System.currentTimeMillis())); // Set payed_time to current time
+            preparedStatement.setString(2, tickedId); // Specify the ticket_name
+
+            // Execute the update
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Check if the update was successful
+            if (affectedRows == 0) {
+                throw new RuntimeException("No rows were updated. Ticket not found: " + tickedId);
+            } else {
+                System.out.println("Checkout time updated successfully for ticket: " + tickedId);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating Checkout time for ticket: " + tickedId, e);
+        }
+    }
+    
+
+    public void AddRowToPayedList(String ticket, float payedInEuro) {
         String selectQuery = "SELECT id, vehicle_type_id, stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";
         String insertQuery = "INSERT INTO scrum.payed_list (vehicle_type_id, ticket_id, payed_in_euro, parked_time) VALUES (?, ?, ?, ?)";
 
@@ -223,5 +169,29 @@ public class CheckOutDB extends DataBaseCore {
         } catch (SQLException e) {
             throw new RuntimeException("Error adding row to payed_list for ticket: " + ticket, e);
         }
-    }*/
+    }
+
+    public boolean HasTicketBeenPayed(String ticketId) {
+        String query = "SELECT pay_time FROM scrum.park_list WHERE ticket_name = ?";
+        boolean payed;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            // Set the ticket_name parameter
+            preparedStatement.setString(1, ticketId);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    payed = resultSet.getTimestamp("pay_time") != null;
+
+                } else {
+                    throw new RuntimeException("No record found for the provided ticket: " + ticketId);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving timestamps from database", e);
+        }
+
+        return payed;
+    }
 }

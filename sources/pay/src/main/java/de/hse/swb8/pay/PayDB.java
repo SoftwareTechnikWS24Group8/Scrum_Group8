@@ -124,13 +124,34 @@ public class PayDB extends DataBaseCore {
 
     public void SetPayed(String ticket_id , float payed_amount)
     {
-        String query = "UPDATE scrum.park_list SET has_payed = ?, pay_time = ?, payed_amount = ? WHERE ticket_name = ?";
+        String query = "SELECT payed_amount FROM scrum.park_list WHERE ticket_name = ?";
+
+        float alreadyPayed = 0;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            // Set the ticket_name parameter
+            preparedStatement.setString(1, ticket_id);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    alreadyPayed = resultSet.getFloat("payed_amount");
+
+                } else {
+                    throw new RuntimeException("No record found for the provided ticket: " + ticket_id);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving timestamps from database", e);
+        }
+
+
+        query = "UPDATE scrum.park_list SET has_payed = ?, pay_time = ?, payed_amount = ? WHERE ticket_name = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             // Set the parameters
             preparedStatement.setBoolean(1, true); // Set has_payed to true
             preparedStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis())); // Set payed_time to current time
-            preparedStatement.setFloat(3, payed_amount); // Set payed_time to current time
+            preparedStatement.setFloat(3, payed_amount+alreadyPayed); // Set payed_time to current time
             preparedStatement.setString(4, ticket_id); // Specify the ticket_name
 
             // Execute the update
@@ -172,56 +193,4 @@ public class PayDB extends DataBaseCore {
         return payed_amount;
     }
 
-    /*
-    //TODO move into checkout
-    public void addRowToPayedList(String ticket, float payedInEuro) {
-        String selectQuery = "SELECT id, vehicle_type_id, stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";
-        String insertQuery = "INSERT INTO scrum.payed_list (vehicle_type_id, ticket_id, payed_in_euro, parked_time) VALUES (?, ?, ?, ?)";
-
-        try {
-            // Step 1: Retrieve data from park_list
-            int vehicleTypeId;
-            Timestamp stampIn;
-            Timestamp stampOut;
-            int ticketId;
-
-            try (PreparedStatement selectStmt = connection.prepareStatement(selectQuery)) {
-                selectStmt.setString(1, ticket);
-                try (ResultSet resultSet = selectStmt.executeQuery()) {
-                    if (resultSet.next()) {
-                        ticketId = resultSet.getInt("id");
-                        vehicleTypeId = resultSet.getInt("vehicle_type_id");
-                        stampIn = resultSet.getTimestamp("stamp_in_time");
-                        stampOut = resultSet.getTimestamp("stamp_out_time");
-
-                        if (stampOut == null) {
-                            throw new IllegalStateException("Stamp out time is null for ticket: " + ticket);
-                        }
-                    } else {
-                        throw new RuntimeException("No record found in park_list for ticket: " + ticket);
-                    }
-                }
-            }
-
-            // Step 2: Calculate parked time in hours
-            float parkedTime = calculateHoursBetweenTimestamps(stampIn, stampOut);
-
-            // Step 3: Insert a new row into payed_list
-            try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
-                insertStmt.setInt(1, vehicleTypeId); // vehicle_type_id
-                insertStmt.setString(2, ticket);    // ticket_id
-                insertStmt.setFloat(3, payedInEuro); // payed_in_euro
-                insertStmt.setFloat(4, parkedTime);  // parked_time
-
-                int rowsInserted = insertStmt.executeUpdate();
-                if (rowsInserted == 0) {
-                    throw new RuntimeException("Failed to insert row into payed_list for ticket: " + ticket);
-                } else {
-                    System.out.println("Successfully added payment record for ticket: " + ticket);
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error adding row to payed_list for ticket: " + ticket, e);
-        }
-    }*/
 }

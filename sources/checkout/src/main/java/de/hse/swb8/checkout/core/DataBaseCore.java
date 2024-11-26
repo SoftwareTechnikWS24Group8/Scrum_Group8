@@ -15,7 +15,7 @@ public class DataBaseCore {
 
     public DataBaseCore(final @NotNull DataBaseInfo dbInfo) {
         Connection tryConnection = null;
-        if(!DataBaseCore.ValidateDataBaseInfo(dbInfo))
+        if(!ValidateDataBaseInfo(dbInfo))
         {
             throw new RuntimeException("Tried creating DataBase without valid Database");
         }
@@ -23,7 +23,7 @@ public class DataBaseCore {
             tryConnection = DriverManager.getConnection(dbInfo.url(), dbInfo.userName(), dbInfo.password());
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            System.exit(1);
         }
         connection = tryConnection;
     }

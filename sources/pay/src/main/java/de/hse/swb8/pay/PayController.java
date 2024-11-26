@@ -12,10 +12,6 @@ import javafx.util.StringConverter;
 
 public class PayController extends SimpleObservable<PayState> {
 
-    public static final String MAX_SLOTS_COLUMN_Name = "Alle Parkplätze";
-    public static final String USABLE_SLOTS_COLUMN_Name = "Verfügbare Parkplätze";
-    public static final String VEHICLE_COLUMN_NAME = "Fahrzeug Name";
-
     public void initialize() {
     }
 
