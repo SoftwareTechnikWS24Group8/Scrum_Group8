@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Dictionary;
+import java.util.List;
 
 
 public class CheckInCoreSystem implements Observer<VehicleType> {
@@ -36,7 +40,7 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
         try {
             Stage stage = new Stage();  // Create a new stage (window)
             FXMLLoader fxmlLoader = new FXMLLoader(CheckInCoreSystem.class.getResource("CheckIn.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 750 , 550);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
             stage.setTitle("Check In");
@@ -50,45 +54,55 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
         }
 
         PopulateVehicleSelection();
-        //PopulatePrices();
+        PopulatePrices();
     }
 
     private void PopulateVehicleSelection() {
         VehicleType[] vehicleTypes = db.GetVehicleTypes();
         controller.UpdateDropDownSelection(vehicleTypes);
-        //VehicleTypeSpotsInfo[] spots = db.GetParkInfos();
-        //controller.UpdateTableView(spots);
         }
 
     private void PopulatePrices(){
-        //controller.PopulatePrices(vehicleNames, headers, priceList);
+        VehicleType[] vehicleTypes = db.GetVehicleTypes();
+
+        VehiclePriceList[] priceLists = new VehiclePriceList[vehicleTypes.length];
+
+
+        for(int i = 0; i < priceLists.length; i++)
+        {
+            Dictionary<Float, Float> prices = db.GetPriceList(vehicleTypes[i]);
+            int spotMaxAmount = db.CheckMaxAmountSpots(vehicleTypes[i]);
+            int spotsUsed = db.CheckSpotUsed(vehicleTypes[i]);
+            priceLists[i] = new VehiclePriceList(vehicleTypes[i],prices,spotMaxAmount,spotMaxAmount-spotsUsed);
+            // name, Dict<Float,Float> spotAmount, spot unused
+        }
+
+        Dictionary<Integer, Float> time_headers = db.GetPriceHeaders();
+        List<Float> values = Collections.list(time_headers.elements());
+        values.sort(Float::compareTo);
+        Float[] sortedArray = values.toArray(new Float[0]);
+
+        controller.PopulatePrices(priceLists,sortedArray);
     }
 
     @Override
-    public void update(Observable<VehicleType> observable, VehicleType newValue) {
+    public void update(Observable<VehicleType> observable, VehicleType selectedVehicle) {
 
-        if(newValue == null)
+        if(selectedVehicle == null)
+        {return;}
+
+        if(db.CheckSpotsNotUsed(selectedVehicle )> 0)
         {
-            // When button clicked
-            VehicleType selectedVehicle = controller.GetCurrentlySelectedVehicle();
-            //TODO Validate with db
-            if(db.CheckSpotAvailable(selectedVehicle )>= 0)
-            {
-                String ticketID = db.AddParkingVehicle(selectedVehicle);
-                controller.SetMessage("Ticket ist: " + ticketID);
+            String ticketID = db.AddParkingVehicle(selectedVehicle);
+            controller.SetMessage("Ticket ist: " + ticketID);
 
-                // Start 20 second thread to clear data from gui
+            //TODO Start 20 second thread to clear data from gui
 
-                System.out.println("OpenDoor Checkin");
-                return;
-            }
+            System.out.println("OpenDoor Checkin");
 
-            int selectedVehicleSpotsAmount = db.CheckSpotAvailable(selectedVehicle);
-
-            controller.SetMessage("Es gibt noch " + selectedVehicleSpotsAmount + " Park Möglichkeiten ");
+            PopulatePrices();
+        }else {
+            controller.SetMessage("Leider gibt es keine Parkmöglichkeit für dieses Auto");
         }
-
-
-
     }
 }

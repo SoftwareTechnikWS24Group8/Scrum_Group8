@@ -11,7 +11,7 @@ import java.util.List;
 public class DataBaseCore {
 
     private final DataBaseInfo info;
-    private final Connection connection;
+    protected final Connection connection;
     public DataBaseCore(final @NotNull DataBaseInfo info) {
         Connection tryConnection = null;
         this.info = info;
