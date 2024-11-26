@@ -1,6 +1,6 @@
 package de.hse.swb8.checkin;
 
-import de.hse.swb8.checkin.core.Enums.VehicleType;
+import de.hse.swb8.checkin.core.Records.VehicleType;
 
 import java.util.Dictionary;
 

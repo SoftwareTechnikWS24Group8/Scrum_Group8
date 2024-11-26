@@ -1,9 +1,10 @@
 package de.hse.swb8.checkin;
 
-import de.hse.swb8.checkin.core.Callback;
-import de.hse.swb8.checkin.core.DataBaseInfo;
+import de.hse.swb8.checkin.core.DataBaseCore;
+import de.hse.swb8.checkin.core.interfaces.Callback;
+import de.hse.swb8.checkin.core.Records.DataBaseInfo;
 import de.hse.swb8.checkin.core.DataBaseLogin;
-import de.hse.swb8.checkin.core.Enums.VehicleType;
+import de.hse.swb8.checkin.core.Records.VehicleType;
 import de.hse.swb8.checkin.core.observer.Observable;
 import de.hse.swb8.checkin.core.observer.Observer;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.List;
@@ -33,7 +33,6 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
 
     private void StartUp(DataBaseInfo info)
     {
-        DataBaseLogin.ValidateDataBaseInfo(info);
         db = new CheckInDB(info);
 
         // Start CheckInUI

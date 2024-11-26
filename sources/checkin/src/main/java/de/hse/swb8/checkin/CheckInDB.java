@@ -1,8 +1,8 @@
 package de.hse.swb8.checkin;
 
 import de.hse.swb8.checkin.core.DataBaseCore;
-import de.hse.swb8.checkin.core.DataBaseInfo;
-import de.hse.swb8.checkin.core.Enums.VehicleType;
+import de.hse.swb8.checkin.core.Records.DataBaseInfo;
+import de.hse.swb8.checkin.core.Records.VehicleType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -135,28 +135,6 @@ public class CheckInDB extends DataBaseCore {
             System.exit(1);
         }
         return list;
-    }
-
-    public VehicleType[] GetVehicleTypes()
-    {
-        List<VehicleType> vehicleTypes = new ArrayList<VehicleType>();
-        try {
-            try (Statement statement = connection.createStatement()) {
-
-                String querry = "SELECT * FROM scrum.vehicle_types *";
-                ResultSet resultSet = statement.executeQuery(querry);
-                while (resultSet.next()) {
-                    VehicleType temp = new VehicleType(resultSet.getInt("id"),resultSet.getString("vehicle_type"),resultSet.getString("display_name"));
-                    vehicleTypes.add(temp);
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        VehicleType[] vehicleTypesArray = new VehicleType[vehicleTypes.size()];
-        vehicleTypesArray = vehicleTypes.toArray(vehicleTypesArray);
-        return vehicleTypesArray;
     }
 
     public int CheckMaxAmountSpots(VehicleType vehicleType) {

@@ -22,4 +22,8 @@ module de.hse.swb8.checkin {
 
     exports de.hse.swb8.checkin;
     exports de.hse.swb8.checkin.core;
+    exports de.hse.swb8.checkin.core.Records;
+    opens de.hse.swb8.checkin.core.Records to com.fasterxml.jackson.databind, javafx.fxml;
+    exports de.hse.swb8.checkin.core.interfaces;
+    opens de.hse.swb8.checkin.core.interfaces to com.fasterxml.jackson.databind, javafx.fxml;
 }

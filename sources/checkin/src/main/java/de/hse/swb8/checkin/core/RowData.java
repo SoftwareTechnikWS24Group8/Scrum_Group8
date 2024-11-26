@@ -1,4 +1,4 @@
-package de.hse.swb8.checkin;
+package de.hse.swb8.checkin.core;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

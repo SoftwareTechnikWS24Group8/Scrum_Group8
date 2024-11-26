@@ -1,6 +1,7 @@
 package de.hse.swb8.checkin;
 
-import de.hse.swb8.checkin.core.Enums.VehicleType;
+import de.hse.swb8.checkin.core.Records.VehicleType;
+import de.hse.swb8.checkin.core.RowData;
 import de.hse.swb8.checkin.core.observer.SimpleObservable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,21 +10,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
 
-import java.util.Arrays;
-
 public class CheckInController extends SimpleObservable<VehicleType> {
 
-    public void initialize() {
-    }
+    public static final String MAX_SLOTS_COLUMN_Name = "Alle Parkplätze";
+    public static final String USABLE_SLOTS_COLUMN_Name = "Verfügbare Parkplätze";
+    public static final String VEHICLE_COLUMN_NAME = "Fahrzeug Name";
 
-    // Helper function to format prices
-    private String formatPrices(float[] times, float[] prices) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < times.length && i < prices.length; i++) {
-            sb.append(String.format("%.1f hrs: €%.2f", times[i], prices[i]));
-            if (i < times.length - 1) sb.append(", ");
-        }
-        return sb.toString();
+    public void initialize() {
     }
 
     @FXML private TableView<RowData> tabTablePrices;
@@ -33,13 +26,13 @@ public class CheckInController extends SimpleObservable<VehicleType> {
         tabTablePrices.getColumns().clear();
         int amountOfColumns = 1+ times_in_hours.length + 2;
         String[] columnHeaders = new String[amountOfColumns];
-        columnHeaders[0] = "Fahrzeug Name";
+        columnHeaders[0] = VEHICLE_COLUMN_NAME;
         for (int i = 0; i < times_in_hours.length; i++) {
             columnHeaders[i+1] = times_in_hours[i]+"";
         }
 
-        columnHeaders[amountOfColumns-1] = "Max Slots";
-        columnHeaders[amountOfColumns-2] = "Free Slots";
+        columnHeaders[amountOfColumns-1] = MAX_SLOTS_COLUMN_Name;
+        columnHeaders[amountOfColumns-2] = USABLE_SLOTS_COLUMN_Name;
 
         for (int i = 0; i < columnHeaders.length; i++) {
 
@@ -61,8 +54,8 @@ public class CheckInController extends SimpleObservable<VehicleType> {
         }
 
         ObservableList<RowData> rows = FXCollections.observableArrayList();
-        for (int i = 0; i < data.length; i++) {
-            rows.add(new RowData(data[i]));
+        for (String[] datum : data) {
+            rows.add(new RowData(datum));
         }
         tabTablePrices.setItems(rows);
 
@@ -77,7 +70,7 @@ public class CheckInController extends SimpleObservable<VehicleType> {
 
 
     @FXML
-    private void OnBtnDriveInPressed(ActionEvent event)
+    private void OnBtnDriveInPressed(ActionEvent ignoredEvent)
     {
         setChanged();
         notifyObservers(dpdVehicleChoice.getValue());
