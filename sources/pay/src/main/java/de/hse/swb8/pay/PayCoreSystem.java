@@ -14,10 +14,11 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 
 
-public class PayCoreSystem implements Observer<VehicleType> {
+public class PayCoreSystem implements Observer<PayState> {
 
     PayController controller;
     PayDB db;
@@ -51,57 +52,50 @@ public class PayCoreSystem implements Observer<VehicleType> {
             e.printStackTrace();
             System.exit(1);
         }
-
-        PopulateVehicleSelection();
-        PopulatePrices();
     }
 
-    private void PopulateVehicleSelection() {
-        VehicleType[] vehicleTypes = db.GetVehicleTypes();
-        controller.UpdateDropDownSelection(vehicleTypes);
-        }
 
-    private void PopulatePrices(){
-        VehicleType[] vehicleTypes = db.GetVehicleTypes();
-
-        VehiclePriceList[] priceLists = new VehiclePriceList[vehicleTypes.length];
-
-
-        for(int i = 0; i < priceLists.length; i++)
-        {
-            Dictionary<Float, Float> prices = db.GetPriceList(vehicleTypes[i]);
-            int spotMaxAmount = db.CheckMaxAmountSpots(vehicleTypes[i]);
-            int spotsUsed = db.CheckSpotUsed(vehicleTypes[i]);
-            priceLists[i] = new VehiclePriceList(vehicleTypes[i],prices,spotMaxAmount,spotMaxAmount-spotsUsed);
-            // name, Dict<Float,Float> spotAmount, spot unused
-        }
-
-        Dictionary<Integer, Float> time_headers = db.GetPriceHeaders();
-        List<Float> values = Collections.list(time_headers.elements());
-        values.sort(Float::compareTo);
-        Float[] sortedArray = values.toArray(new Float[0]);
-
-        controller.PopulatePrices(priceLists,sortedArray);
-    }
 
     @Override
-    public void update(Observable<VehicleType> observable, VehicleType selectedVehicle) {
+    public void update(Observable<PayState> observable, PayState selectedVehicle) {
 
-        if(selectedVehicle == null)
-        {return;}
-
-        if(db.CheckSpotsNotUsed(selectedVehicle )> 0)
+        if(!selectedVehicle.payed())
         {
-            String ticketID = db.AddParkingVehicle(selectedVehicle);
-            controller.SetMessage("Ticket ist: " + ticketID);
-
-            //TODO Start 20 second thread to clear data from gui
-
-            System.out.println("OpenDoor pay");
-
-            PopulatePrices();
+            if(db.DoesTicketExistValid(selectedVehicle.ticket_id()))
+            {
+                controller.SetPriceText(GetPrice(selectedVehicle.ticket_id())+"");
+            }else {
+                controller.SetInfoText("Dieses Ticket existiert nicht");
+            }
         }else {
-            controller.SetMessage("Leider gibt es keine Parkmöglichkeit für dieses Auto");
+            db.SetPayed(selectedVehicle.ticket_id(),selectedVehicle.priceInEuro());
         }
+    }
+
+    private float GetPrice(String ticket_id)
+    {
+        VehicleType type = db.GetVehicleTypeFromTicketID(ticket_id);
+        Dictionary<Float,Float> prices = db.GetPriceList(type);
+
+        float timeParked = db.getHoursBetweenStampFromTicketAndNow(ticket_id);
+
+        Float applicablePrice = getPriceForTimeParked(prices, timeParked);
+
+        return applicablePrice;
+    }
+
+    private static Float getPriceForTimeParked(Dictionary<Float, Float> prices, float timeParked) {
+        Float highestHour = null;
+
+        Enumeration<Float> keys = prices.keys(); // Get all hours
+        while (keys.hasMoreElements()) {
+            Float hour = keys.nextElement();
+            if (hour <= timeParked && (highestHour == null || hour > highestHour)) {
+                highestHour = hour; // Update if it's closer to timeParked but still <= timeParked
+            }
+        }
+
+        // Return the corresponding price, or null if no valid hour is found
+        return highestHour != null ? prices.get(highestHour) : null;
     }
 }

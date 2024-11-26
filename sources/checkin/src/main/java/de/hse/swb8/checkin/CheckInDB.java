@@ -22,8 +22,8 @@ public class CheckInDB extends DataBaseCore {
         String Ticket = "";
 
         try {
-            String query = "INSERT INTO scrum.park_list (vehicle_type_id, stamp_in_time, stamp_out_time, has_payed) " +
-                    "VALUES (?, ?, NULL, ?)";
+            String query = "INSERT INTO scrum.park_list (vehicle_type_id, stamp_in_time, stamp_out_time, has_payed, pay_time) " +
+                    "VALUES (?, ?, NULL, ?, NULL)";
             String updateQuery = "UPDATE scrum.park_list SET ticket_name = ? WHERE id = ?";
 
             // Use a PreparedStatement for the SQL query
