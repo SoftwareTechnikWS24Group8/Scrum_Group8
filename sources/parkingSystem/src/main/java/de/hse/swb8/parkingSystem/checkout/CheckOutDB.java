@@ -1,7 +1,7 @@
-package de.hse.swb8.checkin.checkout;
+package de.hse.swb8.parkingSystem.checkout;
 
-import de.hse.swb8.checkin.core.DataBaseCore;
-import de.hse.swb8.checkin.core.Records.DataBaseInfo;
+import de.hse.swb8.parkingSystem.core.DataBaseCore;
+import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

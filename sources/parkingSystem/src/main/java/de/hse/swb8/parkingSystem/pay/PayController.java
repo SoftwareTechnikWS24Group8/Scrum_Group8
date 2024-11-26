@@ -1,14 +1,9 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.parkingSystem.pay;
 
-import de.hse.swb8.core.Records.VehicleType;
-import de.hse.swb8.core.RowData;
-import de.hse.swb8.core.observer.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import de.hse.swb8.parkingSystem.core.observer.SimpleObservable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.util.StringConverter;
+import javafx.scene.control.TextField;
 
 public class PayController extends SimpleObservable<PayState> {
 

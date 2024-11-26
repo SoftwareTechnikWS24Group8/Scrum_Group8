@@ -1,7 +1,7 @@
-package de.hse.swb8.checkin.core;
+package de.hse.swb8.parkingSystem.core;
 
-import de.hse.swb8.checkin.core.Records.DataBaseInfo;
-import de.hse.swb8.checkin.core.Records.VehicleType;
+import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
+import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;

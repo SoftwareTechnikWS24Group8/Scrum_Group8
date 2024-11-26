@@ -1,4 +1,4 @@
-package de.hse.swb8.checkin.checkout;
+package de.hse.swb8.parkingSystem.checkout;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

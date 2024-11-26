@@ -1,4 +1,4 @@
-package de.hse.swb8.checkin.core;
+package de.hse.swb8.parkingSystem.core;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

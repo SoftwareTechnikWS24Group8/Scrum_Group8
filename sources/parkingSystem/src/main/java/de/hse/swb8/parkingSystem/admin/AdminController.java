@@ -1,5 +1,6 @@
-package de.hse.swb8.parkingSystem.checkin;
+package de.hse.swb8.parkingSystem.admin;
 
+import de.hse.swb8.parkingSystem.checkin.VehiclePriceList;
 import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 import de.hse.swb8.parkingSystem.core.RowData;
 import de.hse.swb8.parkingSystem.core.observer.SimpleObservable;
@@ -7,10 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
-public class CheckInController extends SimpleObservable<VehicleType> {
+public class AdminController extends SimpleObservable<VehicleType> {
 
     public static final String MAX_SLOTS_COLUMN_Name = "Alle Parkplätze";
     public static final String USABLE_SLOTS_COLUMN_Name = "Verfügbare Parkplätze";

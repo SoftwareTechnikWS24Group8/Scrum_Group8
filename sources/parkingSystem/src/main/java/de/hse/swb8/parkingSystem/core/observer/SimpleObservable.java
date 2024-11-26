@@ -1,4 +1,4 @@
-package de.hse.swb8.checkin.core.observer;
+package de.hse.swb8.parkingSystem.core.observer;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

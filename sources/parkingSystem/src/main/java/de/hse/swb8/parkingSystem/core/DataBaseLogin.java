@@ -1,10 +1,10 @@
-package de.hse.swb8.checkin.core;
+package de.hse.swb8.parkingSystem.core;
 
-import de.hse.swb8.checkin.checkin.CheckInMain;
-import de.hse.swb8.checkin.core.Records.DataBaseInfo;
-import de.hse.swb8.checkin.core.interfaces.Callback;
-import de.hse.swb8.checkin.core.observer.Observable;
-import de.hse.swb8.checkin.core.observer.Observer;
+import de.hse.swb8.parkingSystem.checkin.CheckInMain;
+import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
+import de.hse.swb8.parkingSystem.core.interfaces.Callback;
+import de.hse.swb8.parkingSystem.core.observer.Observable;
+import de.hse.swb8.parkingSystem.core.observer.Observer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

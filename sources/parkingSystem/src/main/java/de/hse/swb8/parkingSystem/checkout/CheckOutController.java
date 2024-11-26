@@ -1,6 +1,6 @@
-package de.hse.swb8.checkin.checkout;
+package de.hse.swb8.parkingSystem.checkout;
 
-import de.hse.swb8.checkin.core.observer.SimpleObservable;
+import de.hse.swb8.parkingSystem.core.observer.SimpleObservable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

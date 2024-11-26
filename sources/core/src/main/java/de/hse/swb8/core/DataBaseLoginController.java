@@ -1,7 +1,7 @@
-package de.hse.swb8.pay.core;
+package de.hse.swb8.core;
 
-import de.hse.swb8.pay.core.Records.DataBaseInfo;
-import de.hse.swb8.pay.core.observer.SimpleObservable;
+import de.hse.swb8.core.Records.DataBaseInfo;
+import de.hse.swb8.core.observer.SimpleObservable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;

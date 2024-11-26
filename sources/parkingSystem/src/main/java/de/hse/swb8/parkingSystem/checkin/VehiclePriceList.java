@@ -1,6 +1,6 @@
-package de.hse.swb8.checkin.checkin;
+package de.hse.swb8.parkingSystem.checkin;
 
-import de.hse.swb8.checkin.core.Records.VehicleType;
+import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 
 import java.util.Dictionary;
 

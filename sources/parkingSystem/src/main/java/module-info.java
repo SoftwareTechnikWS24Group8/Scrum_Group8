@@ -1,4 +1,4 @@
-module de.hse.swb8.checkin {
+module de.hse.swb8.parkingSystem {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -14,19 +14,32 @@ module de.hse.swb8.checkin {
     requires java.sql;
     requires annotations;
 
+    //checkout
+    opens de.hse.swb8.parkingSystem.checkout;
+
+    exports de.hse.swb8.parkingSystem.checkout;
+
+    //checkin
+    opens de.hse.swb8.parkingSystem.checkin to javafx.fxml;
+
+    exports de.hse.swb8.parkingSystem.checkin;
+
+    //pay
+    opens de.hse.swb8.parkingSystem.pay to javafx.fxml;
+
+    exports de.hse.swb8.parkingSystem.pay;
+
+    //admin
+
+    //Core
     // Allow both Jackson and JavaFX FXML to access this package
-    opens de.hse.swb8.checkin.core to com.fasterxml.jackson.databind, javafx.fxml;
+    opens de.hse.swb8.parkingSystem.core to com.fasterxml.jackson.databind, javafx.fxml;
+    opens de.hse.swb8.parkingSystem.core.Records to com.fasterxml.jackson.databind, javafx.fxml;
+    opens de.hse.swb8.parkingSystem.core.interfaces to com.fasterxml.jackson.databind, javafx.fxml;
 
-    // FXML loader needs reflective access to this package as well
-    opens de.hse.swb8.checkin to javafx.fxml;
+    exports de.hse.swb8.parkingSystem.core;
+    exports de.hse.swb8.parkingSystem.core.Records;
+    exports de.hse.swb8.parkingSystem.core.interfaces;
 
-    exports de.hse.swb8.checkin.checkin;
-    exports de.hse.swb8.checkin.core;
-    exports de.hse.swb8.checkin.core.Records;
-    opens de.hse.swb8.checkin.core.Records to com.fasterxml.jackson.databind, javafx.fxml;
-    exports de.hse.swb8.checkin.core.interfaces;
-    opens de.hse.swb8.checkin.core.interfaces to com.fasterxml.jackson.databind, javafx.fxml;
-    opens de.hse.swb8.checkin.checkin to javafx.fxml;
-    exports de.hse.swb8.checkin.checkout;
-    opens de.hse.swb8.checkin.checkout;
+
 }

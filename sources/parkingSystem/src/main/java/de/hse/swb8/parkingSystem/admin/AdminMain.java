@@ -1,9 +1,9 @@
-package de.hse.swb8.parkingSystem.checkin;
+package de.hse.swb8.parkingSystem.admin;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class CheckInMain extends Application {
+public class AdminMain extends Application {
 
     public static void main(String[] args) {
 
@@ -13,6 +13,6 @@ public class CheckInMain extends Application {
     @Override
     public void start(Stage primaryStage){
 
-        CheckInCoreSystem coreSystem = new CheckInCoreSystem();
+        AdminCoreSystem coreSystem = new AdminCoreSystem();
     }
 }

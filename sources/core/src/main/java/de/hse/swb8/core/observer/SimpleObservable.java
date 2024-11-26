@@ -1,4 +1,4 @@
-package de.hse.swb8.pay.core.observer;
+package de.hse.swb8.core.observer;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

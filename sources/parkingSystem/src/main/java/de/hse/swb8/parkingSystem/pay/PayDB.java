@@ -1,8 +1,9 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.parkingSystem.pay;
 
-import de.hse.swb8.pay.core.DataBaseCore;
-import de.hse.swb8.pay.core.Records.DataBaseInfo;
-import de.hse.swb8.pay.core.Records.VehicleType;
+
+import de.hse.swb8.parkingSystem.core.DataBaseCore;
+import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
+import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 
 import java.sql.*;
 import java.util.Dictionary;
@@ -74,7 +75,8 @@ public class PayDB extends DataBaseCore {
                         "WHERE v.vehicle_type_id =" + selectedVehicle.id();
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
-                    list.put(resultSet.getFloat("time_hours"),resultSet.getFloat("price"));
+                    float price = resultSet.getFloat("price");
+                    list.put(resultSet.getFloat("time_hours"),price);
                 }
             }
         } catch (SQLException e) {

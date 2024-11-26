@@ -1,4 +1,4 @@
-package de.hse.swb8.checkin.core.observer;
+package de.hse.swb8.parkingSystem.core.observer;
 
 public interface Observable<T> {
     void addObserver(Observer<T> o);

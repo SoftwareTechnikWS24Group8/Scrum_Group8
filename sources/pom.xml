@@ -14,7 +14,7 @@
 
     <modules>
         <module>AdminPanel</module>
-        <module>CheckIn</module>
+        <module>parkingSystem</module>
         <module>CheckOut</module>
         <module>Pay</module>
     </modules>

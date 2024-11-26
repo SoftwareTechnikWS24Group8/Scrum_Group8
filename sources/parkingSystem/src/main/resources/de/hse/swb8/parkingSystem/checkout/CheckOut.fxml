@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hse.swb8.checkin.checkout.CheckOutController">
+<AnchorPane prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hse.swb8.parkingSystem.checkout.CheckOutController">
    <children>
       <Label layoutX="14.0" layoutY="21.0" prefHeight="45.0" prefWidth="174.0" text="Check Out">
          <font>

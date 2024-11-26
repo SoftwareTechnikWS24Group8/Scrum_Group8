@@ -1,4 +1,4 @@
-package de.hse.swb8.pay.core.observer;
+package de.hse.swb8.core.observer;
 
 public interface Observable<T> {
     void addObserver(Observer<T> o);

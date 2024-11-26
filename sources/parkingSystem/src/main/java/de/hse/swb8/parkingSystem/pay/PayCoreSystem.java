@@ -1,21 +1,20 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.parkingSystem.pay;
 
-import de.hse.swb8.pay.core.DataBaseLogin;
-import de.hse.swb8.pay.core.Records.DataBaseInfo;
-import de.hse.swb8.pay.core.Records.VehicleType;
-import de.hse.swb8.pay.core.interfaces.Callback;
-import de.hse.swb8.pay.core.observer.Observable;
-import de.hse.swb8.pay.core.observer.Observer;
+
+import de.hse.swb8.parkingSystem.core.DataBaseLogin;
+import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
+import de.hse.swb8.parkingSystem.core.Records.VehicleType;
+import de.hse.swb8.parkingSystem.core.interfaces.Callback;
+import de.hse.swb8.parkingSystem.core.observer.Observable;
+import de.hse.swb8.parkingSystem.core.observer.Observer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.List;
 
 
 public class PayCoreSystem implements Observer<PayState> {

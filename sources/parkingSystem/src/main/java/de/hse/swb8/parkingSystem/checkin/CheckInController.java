@@ -1,8 +1,8 @@
-package de.hse.swb8.checkin.checkin;
+package de.hse.swb8.parkingSystem.checkin;
 
-import de.hse.swb8.checkin.core.Records.VehicleType;
-import de.hse.swb8.checkin.core.RowData;
-import de.hse.swb8.checkin.core.observer.SimpleObservable;
+import de.hse.swb8.parkingSystem.core.Records.VehicleType;
+import de.hse.swb8.parkingSystem.core.RowData;
+import de.hse.swb8.parkingSystem.core.observer.SimpleObservable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,7 +47,13 @@ public class CheckInController extends SimpleObservable<VehicleType> {
             data[i][0] = priceLists[i].vehicleType().displayName();
             for (int j = 0; j < times_in_hours.length; j++)
             {
-                data[i][j+1] = priceLists[i].priceInEuro().get(times_in_hours[j])+" €";
+                Float temp = priceLists[i].priceInEuro().get(times_in_hours[j]);
+                if(temp == null)
+                {
+                    temp = CheckInCoreSystem.DEFAULT_COST;
+                }
+                System.out.println(temp);
+                data[i][j+1] = temp+ " €";
             }
             data[i][amountOfColumns-2] = priceLists[i].spotUnused()+"";
             data[i][amountOfColumns-1] = priceLists[i].spotAmount()+"";

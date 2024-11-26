@@ -1,11 +1,11 @@
-package de.hse.swb8.checkin.checkin;
+package de.hse.swb8.parkingSystem.checkin;
 
-import de.hse.swb8.checkin.core.interfaces.Callback;
-import de.hse.swb8.checkin.core.Records.DataBaseInfo;
-import de.hse.swb8.checkin.core.DataBaseLogin;
-import de.hse.swb8.checkin.core.Records.VehicleType;
-import de.hse.swb8.checkin.core.observer.Observable;
-import de.hse.swb8.checkin.core.observer.Observer;
+import de.hse.swb8.parkingSystem.core.interfaces.Callback;
+import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
+import de.hse.swb8.parkingSystem.core.DataBaseLogin;
+import de.hse.swb8.parkingSystem.core.Records.VehicleType;
+import de.hse.swb8.parkingSystem.core.observer.Observable;
+import de.hse.swb8.parkingSystem.core.observer.Observer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -21,6 +21,8 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
 
     CheckInController controller;
     CheckInDB db;
+
+    public static final float DEFAULT_COST = 999f;
 
     public CheckInCoreSystem()
     {

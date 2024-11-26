@@ -1,6 +1,7 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.parkingSystem.pay;
 
-import de.hse.swb8.pay.core.Records.VehicleType;
+
+import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 
 import java.util.Dictionary;
 

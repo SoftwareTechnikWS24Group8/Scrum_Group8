@@ -1,4 +1,4 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.parkingSystem.pay;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
