@@ -31,6 +31,10 @@ module de.hse.swb8.parkingSystem {
 
     //admin
 
+    opens de.hse.swb8.parkingSystem.admin to javafx.fxml;
+
+    exports de.hse.swb8.parkingSystem.admin;
+
     //Core
     // Allow both Jackson and JavaFX FXML to access this package
     opens de.hse.swb8.parkingSystem.core to com.fasterxml.jackson.databind, javafx.fxml;
