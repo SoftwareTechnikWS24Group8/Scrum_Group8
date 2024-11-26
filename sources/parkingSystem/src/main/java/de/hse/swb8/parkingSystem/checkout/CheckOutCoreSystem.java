@@ -21,23 +21,21 @@ public class CheckOutCoreSystem implements Observer<String> {
     CheckOutController controller;
     CheckOutDB db;
 
-    public CheckOutCoreSystem()
-    {
+    public CheckOutCoreSystem() {
         // Start DataBaseLogin
         DataBaseLogin dblogin = new DataBaseLogin();
         Callback callback = this::StartUp;
         dblogin.LoginIntoDataBase(callback);
     }
 
-    private void StartUp(DataBaseInfo info)
-    {
+    private void StartUp(DataBaseInfo info) {
         db = new CheckOutDB(info);
 
         // Start payUI
         try {
             Stage stage = new Stage();  // Create a new stage (window)
             FXMLLoader fxmlLoader = new FXMLLoader(CheckOutCoreSystem.class.getResource("CheckOut.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 750 , 550);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 550);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
             stage.setTitle("CheckOut Window");
@@ -53,13 +51,11 @@ public class CheckOutCoreSystem implements Observer<String> {
     }
 
 
-
     @Override
     public void update(Observable<String> observable, String ticketId) {
 
-        if(db.DoesTicketExistValid(ticketId))
-        {
-            if(db.HasTicketBeenPayed(ticketId)) {
+        if (db.DoesTicketExistValid(ticketId)) {
+            if (db.HasTicketBeenPayed(ticketId)) {
                 float timer_after_payment = db.getHoursBetweenStampFromTicketAndNow(ticketId);
 
                 if (timer_after_payment > TIME_AFTER_PAYMENT) {
@@ -73,12 +69,11 @@ public class CheckOutCoreSystem implements Observer<String> {
                     System.out.println(already_payed);
                     db.AddRowToPayedList(ticketId, already_payed);
                 }
+            } else {
+                controller.SetInfoText("Dieses Ticket wurde nicht bezahlt");
             }
-            else {
-                controller.SetInfoText("Dieses Ticket wurde nicht bezahlt" );
-            }
-        }else {
-            controller.SetInfoText("Dieses Ticket exisitert nicht" );
+        } else {
+            controller.SetInfoText("Dieses Ticket exisitert nicht");
         }
 
     }

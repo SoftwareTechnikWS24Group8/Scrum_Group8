@@ -10,36 +10,36 @@ public class PayController extends SimpleObservable<PayState> {
     public void initialize() {
     }
 
-    @FXML private TextField txtTicketId;
+    @FXML
+    private TextField txtTicketId;
 
     @FXML
-    private void OnBtnReadTicketPressed(ActionEvent ignoredEvent)
-    {
+    private void OnBtnReadTicketPressed(ActionEvent ignoredEvent) {
         String ticketText = txtTicketId.getText();
 
-        PayState state = new PayState(ticketText,-1,false);
+        PayState state = new PayState(ticketText, -1, false);
         setChanged();
         notifyObservers(state);
     }
 
-    @FXML private TextField txtInfo;
+    @FXML
+    private TextField txtInfo;
 
-    public void SetInfoText(String info)
-    {
+    public void SetInfoText(String info) {
         txtInfo.setText(info);
     }
 
-    @FXML private TextField txtPrice;
+    @FXML
+    private TextField txtPrice;
 
-    public void SetPriceText(String price)
-    {
+    public void SetPriceText(String price) {
         txtPrice.setText(price);
     }
 
-    @FXML void OnBtnPayPressed(ActionEvent ignoredEvent)
-    {
+    @FXML
+    void OnBtnPayPressed(ActionEvent ignoredEvent) {
         setChanged();
         String ticketText = txtTicketId.getText();
-        notifyObservers(new PayState(ticketText,Float.parseFloat(txtPrice.getText()),true));
+        notifyObservers(new PayState(ticketText, Float.parseFloat(txtPrice.getText()), true));
     }
 }

@@ -15,8 +15,7 @@ public class DataBaseCore {
 
     public DataBaseCore(final @NotNull DataBaseInfo dbInfo) {
         Connection tryConnection = null;
-        if(!DataBaseCore.ValidateDataBaseInfo(dbInfo))
-        {
+        if (!DataBaseCore.ValidateDataBaseInfo(dbInfo)) {
             throw new RuntimeException("Tried creating DataBase without valid Database");
         }
         try {
@@ -28,8 +27,7 @@ public class DataBaseCore {
         connection = tryConnection;
     }
 
-    public VehicleType[] GetVehicleTypes()
-    {
+    public VehicleType[] GetVehicleTypes() {
         List<VehicleType> vehicleTypes = new ArrayList<>();
         try {
             try (Statement statement = connection.createStatement()) {
@@ -41,7 +39,7 @@ public class DataBaseCore {
                 while (resultSet.next()) {
                     int vehicle_type_id = resultSet.getInt("vehicle_type_id");
                     String vehicle_display_name = resultSet.getString("display_name");
-                    VehicleType temp = new VehicleType(vehicle_type_id,vehicle_display_name);
+                    VehicleType temp = new VehicleType(vehicle_type_id, vehicle_display_name);
                     vehicleTypes.add(temp);
                 }
             }

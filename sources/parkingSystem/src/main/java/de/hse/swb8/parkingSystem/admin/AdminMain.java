@@ -11,7 +11,7 @@ public class AdminMain extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) {
 
         AdminCoreSystem coreSystem = new AdminCoreSystem();
     }

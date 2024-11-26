@@ -5,9 +5,9 @@ import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.time.LocalDateTime;
 
 public class CheckInDB extends DataBaseCore {
 
@@ -48,7 +48,7 @@ public class CheckInDB extends DataBaseCore {
                         generatedId = generatedKeys.getInt(1);
 
                         // Create the Ticket string
-                        Ticket = generatedId +"-"+selectedVehicle.id() +quersumme+localDateTime.getHour()+localDateTime.getDayOfWeek().getValue();
+                        Ticket = generatedId + "-" + selectedVehicle.id() + quersumme + localDateTime.getHour() + localDateTime.getDayOfWeek().getValue();
                         System.out.println(Ticket); // Output the result
                     } else {
                         throw new RuntimeException("Failed to retrieve the ID of the inserted park_list entry.");
@@ -83,9 +83,8 @@ public class CheckInDB extends DataBaseCore {
     }
 
 
-    public Dictionary<Float,Float> GetPriceList(VehicleType selectedVehicle)
-    {
-        Dictionary<Float,Float> list = new Hashtable<Float,Float>();
+    public Dictionary<Float, Float> GetPriceList(VehicleType selectedVehicle) {
+        Dictionary<Float, Float> list = new Hashtable<Float, Float>();
         try {
             try (Statement statement = connection.createStatement()) {
 
@@ -95,15 +94,14 @@ public class CheckInDB extends DataBaseCore {
                         "WHERE v.vehicle_type_id =" + selectedVehicle.id();
                 ResultSet resultSet = statement.executeQuery(querry);
                 while (resultSet.next()) {
-                    list.put(resultSet.getFloat("time_hours"),resultSet.getFloat("price"));
+                    list.put(resultSet.getFloat("time_hours"), resultSet.getFloat("price"));
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        if(list.isEmpty())
-        {
+        if (list.isEmpty()) {
             System.out.println("No rows found");
             System.exit(1);
         }
@@ -111,24 +109,22 @@ public class CheckInDB extends DataBaseCore {
         return list;
     }
 
-    public Dictionary<Integer,Float> GetPriceHeaders()
-    {
-        Dictionary<Integer,Float> list = new Hashtable<Integer,Float>();
+    public Dictionary<Integer, Float> GetPriceHeaders() {
+        Dictionary<Integer, Float> list = new Hashtable<Integer, Float>();
         try {
             try (Statement statement = connection.createStatement()) {
 
                 String querry = "SELECT * FROM scrum.hours_list";
                 ResultSet resultSet = statement.executeQuery(querry);
                 while (resultSet.next()) {
-                    list.put(resultSet.getInt("id"),resultSet.getFloat("time_hours"));
+                    list.put(resultSet.getInt("id"), resultSet.getFloat("time_hours"));
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        if(list.isEmpty())
-        {
+        if (list.isEmpty()) {
             System.out.println("No rows found");
             System.exit(1);
         }
@@ -160,7 +156,7 @@ public class CheckInDB extends DataBaseCore {
         try {
             try (Statement statement = connection.createStatement()) {
 
-                String querry = "SELECT COUNT(*) AS used_spots FROM scrum.park_list WHERE vehicle_type_id ="+ type.id() +" AND stamp_out_time IS NULL";
+                String querry = "SELECT COUNT(*) AS used_spots FROM scrum.park_list WHERE vehicle_type_id =" + type.id() + " AND stamp_out_time IS NULL";
                 ResultSet resultSet = statement.executeQuery(querry);
                 if (resultSet.next()) {
                     maxAmount = resultSet.getInt("used_spots");
@@ -177,6 +173,6 @@ public class CheckInDB extends DataBaseCore {
         int maxAmount = CheckMaxAmountSpots(type);
         int usedSpots = CheckSpotUsed(type);
 
-        return maxAmount-usedSpots;
+        return maxAmount - usedSpots;
     }
 }

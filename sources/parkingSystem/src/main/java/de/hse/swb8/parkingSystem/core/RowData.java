@@ -13,7 +13,7 @@ public class RowData {
         }
     }
 
-    public StringProperty getProperty(int index) {
+    public StringProperty GetProperty(int index) {
         if (index >= 0 && index < properties.length) {
             return properties[index];
         }

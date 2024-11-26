@@ -15,27 +15,26 @@ public class CheckOutDB extends DataBaseCore {
         super(info);
     }
 
-    public boolean DoesTicketExistValid(String Ticket_id)
-    {
+    public boolean DoesTicketExistValid(String Ticket_id) {
         boolean isActive = false;
         String query = "SELECT COUNT(*) FROM scrum.park_list WHERE ticket_name = ? AND stamp_out_time IS NULL";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-        // Set the ticket_name parameter
-        preparedStatement.setString(1, Ticket_id);
+            // Set the ticket_name parameter
+            preparedStatement.setString(1, Ticket_id);
 
-        // Execute the query
-        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-            if (resultSet.next()) {
-                // Get the count from the result
-                int count = resultSet.getInt(1);
-                isActive = count > 0; // If count > 0, the ticket is active
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Get the count from the result
+                    int count = resultSet.getInt(1);
+                    isActive = count > 0; // If count > 0, the ticket is active
+                }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error checking active ticket", e);
         }
-    } catch (SQLException e) {
-        throw new RuntimeException("Error checking active ticket", e);
-    }
-    return isActive;
+        return isActive;
     }
 
     public float getHoursBetweenStampFromTicketAndNow(String ticket) {
@@ -118,7 +117,7 @@ public class CheckOutDB extends DataBaseCore {
             throw new RuntimeException("Error updating Checkout time for ticket: " + tickedId, e);
         }
     }
-    
+
 
     public void AddRowToPayedList(String ticket, float payedInEuro) {
         String selectQuery = "SELECT id, vehicle_type_id, stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";

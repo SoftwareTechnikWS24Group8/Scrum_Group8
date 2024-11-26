@@ -16,31 +16,29 @@ public class PayDB extends DataBaseCore {
         super(info);
     }
 
-    public boolean DoesTicketExistValid(String Ticket_id)
-    {
+    public boolean DoesTicketExistValid(String Ticket_id) {
         boolean isActive = false;
         String query = "SELECT COUNT(*) FROM scrum.park_list WHERE ticket_name = ? AND stamp_out_time IS NULL";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-        // Set the ticket_name parameter
-        preparedStatement.setString(1, Ticket_id);
+            // Set the ticket_name parameter
+            preparedStatement.setString(1, Ticket_id);
 
-        // Execute the query
-        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-            if (resultSet.next()) {
-                // Get the count from the result
-                int count = resultSet.getInt(1);
-                isActive = count > 0; // If count > 0, the ticket is active
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Get the count from the result
+                    int count = resultSet.getInt(1);
+                    isActive = count > 0; // If count > 0, the ticket is active
+                }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error checking active ticket", e);
         }
-    } catch (SQLException e) {
-        throw new RuntimeException("Error checking active ticket", e);
-    }
-    return isActive;
+        return isActive;
     }
 
-    public VehicleType GetVehicleTypeFromTicketID(String Ticket_id)
-    {
+    public VehicleType GetVehicleTypeFromTicketID(String Ticket_id) {
         VehicleType type = null;
         String query = "SELECT * FROM scrum.park_list WHERE ticket_name = ?";
 
@@ -63,9 +61,8 @@ public class PayDB extends DataBaseCore {
     }
 
 
-    public Dictionary<Float,Float> GetPriceList(VehicleType selectedVehicle)
-    {
-        Dictionary<Float,Float> list = new Hashtable<>();
+    public Dictionary<Float, Float> GetPriceList(VehicleType selectedVehicle) {
+        Dictionary<Float, Float> list = new Hashtable<>();
         try {
             try (Statement statement = connection.createStatement()) {
 
@@ -76,15 +73,14 @@ public class PayDB extends DataBaseCore {
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
                     float price = resultSet.getFloat("price");
-                    list.put(resultSet.getFloat("time_hours"),price);
+                    list.put(resultSet.getFloat("time_hours"), price);
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        if(list.isEmpty())
-        {
+        if (list.isEmpty()) {
             System.out.println("No rows found");
             System.exit(1);
         }
@@ -92,7 +88,7 @@ public class PayDB extends DataBaseCore {
         return list;
     }
 
-    public float getHoursBetweenStampFromTicketAndNow(String ticket) {
+    public float GetHoursBetweenStampFromTicketAndNow(String ticket) {
         String query = "SELECT stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";
         Timestamp stampIn;
 
@@ -124,8 +120,7 @@ public class PayDB extends DataBaseCore {
         return millisecondsDifference / (1000f * 60 * 60); // Convert milliseconds to hours as a float
     }
 
-    public void SetPayed(String ticket_id , float payed_amount)
-    {
+    public void SetPayed(String ticket_id, float payed_amount) {
         String query = "SELECT payed_amount FROM scrum.park_list WHERE ticket_name = ?";
 
         float alreadyPayed = 0;
@@ -153,7 +148,7 @@ public class PayDB extends DataBaseCore {
             // Set the parameters
             preparedStatement.setBoolean(1, true); // Set has_payed to true
             preparedStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis())); // Set payed_time to current time
-            preparedStatement.setFloat(3, payed_amount+alreadyPayed); // Set payed_time to current time
+            preparedStatement.setFloat(3, payed_amount + alreadyPayed); // Set payed_time to current time
             preparedStatement.setString(4, ticket_id); // Specify the ticket_name
 
             // Execute the update

@@ -24,24 +24,22 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
     Callback callback;
 
     public DataBaseLogin() {
-        String tempDir = System.getProperty("user.home") + File.separator +DIRECTORY_NAME;
+        String tempDir = System.getProperty("user.home") + File.separator + DIRECTORY_NAME;
 
         databaseSaveFile = tempDir + File.separator + DATABASE_SAVE_FILE_NAME + FILE_ENDING;
     }
 
 
-    public void LoginIntoDataBase(Callback onComplete)
-    {
+    public void LoginIntoDataBase(Callback onComplete) {
         callback = onComplete;
         //Read file
-        DataBaseInfo info = JSONHandler.readDataBaseInfo(databaseSaveFile);
+        DataBaseInfo info = JSONHandler.ReadDataBaseInfo(databaseSaveFile);
         //If file exists
-        if(info != null && DataBaseCore.ValidateDataBaseInfo(info))
-        {
+        if (info != null && DataBaseCore.ValidateDataBaseInfo(info)) {
             callback.execute(info);
-        }else {
+        } else {
             try {
-                startWindow();
+                StartWindow();
             } catch (IOException e) {
                 e.printStackTrace();
                 System.err.println("Was not able to open DataBaseLogin Window");
@@ -49,9 +47,10 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
             }
         }
     }
+
     private DataBaseLoginController controller;
 
-    private void startWindow() throws IOException {
+    private void StartWindow() throws IOException {
 
         System.out.println("Starting window");
         try {
@@ -77,17 +76,15 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
     @Override
     public void update(Observable<DataBaseInfo> observable, DataBaseInfo newValue) {
 
-        if(!DataBaseCore.ValidateDataBaseInfo(newValue))
-        {
+        if (!DataBaseCore.ValidateDataBaseInfo(newValue)) {
             controller.AppendToLog("Database values were not valid");
             return;
         }
-        if(databaseSaveFile == null)
-        {
+        if (databaseSaveFile == null) {
             System.out.println("ERROR: databasesavefile path was not set but requested");
             System.exit(2);
         }
-        JSONHandler.saveDataBaseInfo(newValue,databaseSaveFile);
+        JSONHandler.SaveDataBaseInfo(newValue, databaseSaveFile);
         callback.execute(newValue);
     }
 }

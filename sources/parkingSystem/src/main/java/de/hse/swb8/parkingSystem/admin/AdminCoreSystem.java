@@ -19,23 +19,21 @@ public class AdminCoreSystem implements Observer<VehicleType> {
     AdminController controller;
     AdminDB db;
 
-    public AdminCoreSystem()
-    {
+    public AdminCoreSystem() {
         // Start DataBaseLogin
         DataBaseLogin dblogin = new DataBaseLogin();
         Callback callback = this::StartUp;
         dblogin.LoginIntoDataBase(callback);
     }
 
-    private void StartUp(DataBaseInfo info)
-    {
+    private void StartUp(DataBaseInfo info) {
         db = new AdminDB(info);
 
         // Start CheckInUI
         try {
             Stage stage = new Stage();  // Create a new stage (window)
             FXMLLoader fxmlLoader = new FXMLLoader(AdminCoreSystem.class.getResource("CheckIn.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 750 , 550);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 550);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
             stage.setTitle("Check In");

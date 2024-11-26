@@ -1,9 +1,9 @@
 package de.hse.swb8.parkingSystem.checkin;
 
-import de.hse.swb8.parkingSystem.core.interfaces.Callback;
-import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 import de.hse.swb8.parkingSystem.core.DataBaseLogin;
+import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 import de.hse.swb8.parkingSystem.core.Records.VehicleType;
+import de.hse.swb8.parkingSystem.core.interfaces.Callback;
 import de.hse.swb8.parkingSystem.core.observer.Observable;
 import de.hse.swb8.parkingSystem.core.observer.Observer;
 import javafx.fxml.FXMLLoader;
@@ -24,23 +24,21 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
 
     public static final float DEFAULT_COST = 999f;
 
-    public CheckInCoreSystem()
-    {
+    public CheckInCoreSystem() {
         // Start DataBaseLogin
         DataBaseLogin dblogin = new DataBaseLogin();
         Callback callback = this::StartUp;
         dblogin.LoginIntoDataBase(callback);
     }
 
-    private void StartUp(DataBaseInfo info)
-    {
+    private void StartUp(DataBaseInfo info) {
         db = new CheckInDB(info);
 
         // Start CheckInUI
         try {
             Stage stage = new Stage();  // Create a new stage (window)
             FXMLLoader fxmlLoader = new FXMLLoader(CheckInCoreSystem.class.getResource("CheckIn.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 750 , 550);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 550);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
             stage.setTitle("Check In");
@@ -60,20 +58,19 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
     private void PopulateVehicleSelection() {
         VehicleType[] vehicleTypes = db.GetVehicleTypes();
         controller.UpdateDropDownSelection(vehicleTypes);
-        }
+    }
 
-    private void PopulatePrices(){
+    private void PopulatePrices() {
         VehicleType[] vehicleTypes = db.GetVehicleTypes();
 
         VehiclePriceList[] priceLists = new VehiclePriceList[vehicleTypes.length];
 
 
-        for(int i = 0; i < priceLists.length; i++)
-        {
+        for (int i = 0; i < priceLists.length; i++) {
             Dictionary<Float, Float> prices = db.GetPriceList(vehicleTypes[i]);
             int spotMaxAmount = db.CheckMaxAmountSpots(vehicleTypes[i]);
             int spotsUsed = db.CheckSpotUsed(vehicleTypes[i]);
-            priceLists[i] = new VehiclePriceList(vehicleTypes[i],prices,spotMaxAmount,spotMaxAmount-spotsUsed);
+            priceLists[i] = new VehiclePriceList(vehicleTypes[i], prices, spotMaxAmount, spotMaxAmount - spotsUsed);
             // name, Dict<Float,Float> spotAmount, spot unused
         }
 
@@ -82,17 +79,17 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
         values.sort(Float::compareTo);
         Float[] sortedArray = values.toArray(new Float[0]);
 
-        controller.PopulatePrices(priceLists,sortedArray);
+        controller.PopulatePrices(priceLists, sortedArray);
     }
 
     @Override
     public void update(Observable<VehicleType> observable, VehicleType selectedVehicle) {
 
-        if(selectedVehicle == null)
-        {return;}
+        if (selectedVehicle == null) {
+            return;
+        }
 
-        if(db.CheckSpotsNotUsed(selectedVehicle )> 0)
-        {
+        if (db.CheckSpotsNotUsed(selectedVehicle) > 0) {
             String ticketID = db.AddParkingVehicle(selectedVehicle);
             controller.SetMessage("Ticket ist: " + ticketID);
 
@@ -101,7 +98,7 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
             System.out.println("OpenDoor Checkin");
 
             PopulatePrices();
-        }else {
+        } else {
             controller.SetMessage("Leider gibt es keine Parkmöglichkeit für dieses Auto");
         }
     }

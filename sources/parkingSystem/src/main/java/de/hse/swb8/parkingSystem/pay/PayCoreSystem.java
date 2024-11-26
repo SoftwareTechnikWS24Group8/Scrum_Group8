@@ -22,23 +22,21 @@ public class PayCoreSystem implements Observer<PayState> {
     PayController controller;
     PayDB db;
 
-    public PayCoreSystem()
-    {
+    public PayCoreSystem() {
         // Start DataBaseLogin
         DataBaseLogin dblogin = new DataBaseLogin();
         Callback callback = this::StartUp;
         dblogin.LoginIntoDataBase(callback);
     }
 
-    private void StartUp(DataBaseInfo info)
-    {
+    private void StartUp(DataBaseInfo info) {
         db = new PayDB(info);
 
         // Start payUI
         try {
             Stage stage = new Stage();  // Create a new stage (window)
             FXMLLoader fxmlLoader = new FXMLLoader(PayCoreSystem.class.getResource("Pay.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 750 , 550);
+            Scene scene = new Scene(fxmlLoader.load(), 750, 550);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
             stage.setTitle("Pay Window");
@@ -54,34 +52,30 @@ public class PayCoreSystem implements Observer<PayState> {
     }
 
 
-
     @Override
     public void update(Observable<PayState> observable, PayState selectedVehicle) {
 
-        if(!selectedVehicle.payed())
-        {
-            if(db.DoesTicketExistValid(selectedVehicle.ticket_id()))
-            {
-                controller.SetPriceText(GetPrice(selectedVehicle.ticket_id())+"");
-            }else {
+        if (!selectedVehicle.payed()) {
+            if (db.DoesTicketExistValid(selectedVehicle.ticket_id())) {
+                controller.SetPriceText(GetPrice(selectedVehicle.ticket_id()) + "");
+            } else {
                 controller.SetInfoText("Dieses Ticket existiert nicht");
             }
-        }else {
-            db.SetPayed(selectedVehicle.ticket_id(),selectedVehicle.priceInEuro());
+        } else {
+            db.SetPayed(selectedVehicle.ticket_id(), selectedVehicle.priceInEuro());
         }
     }
 
-    private float GetPrice(String ticket_id)
-    {
+    private float GetPrice(String ticket_id) {
         VehicleType type = db.GetVehicleTypeFromTicketID(ticket_id);
-        Dictionary<Float,Float> prices = db.GetPriceList(type);
+        Dictionary<Float, Float> prices = db.GetPriceList(type);
 
-        float timeParked = db.getHoursBetweenStampFromTicketAndNow(ticket_id);
+        float timeParked = db.GetHoursBetweenStampFromTicketAndNow(ticket_id);
         float alreadyPayed = db.GetAlreadyPayedMoney(ticket_id);
 
         Float applicablePrice = getPriceForTimeParked(prices, timeParked);
 
-        return applicablePrice- alreadyPayed;
+        return applicablePrice - alreadyPayed;
     }
 
     private static Float getPriceForTimeParked(Dictionary<Float, Float> prices, float timeParked) {

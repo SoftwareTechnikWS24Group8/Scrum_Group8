@@ -25,13 +25,13 @@ public class DataBaseLoginController extends SimpleObservable<DataBaseInfo> {
         LocalTime time = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String timestamp = time.format(formatter);
-        txaLog.appendText(timestamp +": " +msg);
+        txaLog.appendText(timestamp + ": " + msg);
     }
 
     @FXML
     void OnLoginButtonPressed(ActionEvent ignoredEvent) {
 
-        DataBaseInfo dbInfo = new DataBaseInfo(txtUrl.getText(),txtUser.getText(),txtPassword.getText());
+        DataBaseInfo dbInfo = new DataBaseInfo(txtUrl.getText(), txtUser.getText(), txtPassword.getText());
         this.setChanged();
         this.notifyObservers(dbInfo);
     }

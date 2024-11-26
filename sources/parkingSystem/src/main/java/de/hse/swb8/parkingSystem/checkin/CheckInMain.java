@@ -11,7 +11,7 @@ public class CheckInMain extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) {
 
         CheckInCoreSystem coreSystem = new CheckInCoreSystem();
     }
