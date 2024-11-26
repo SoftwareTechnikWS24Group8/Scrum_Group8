@@ -1,17 +1,17 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.checkout;
 
-import de.hse.swb8.pay.core.DataBaseCore;
-import de.hse.swb8.pay.core.Records.DataBaseInfo;
-import de.hse.swb8.pay.core.Records.VehicleType;
+import de.hse.swb8.checkout.core.DataBaseCore;
+import de.hse.swb8.checkout.core.Records.DataBaseInfo;
+import de.hse.swb8.checkout.core.Records.VehicleType;
 
 import java.sql.*;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class PayDB extends DataBaseCore {
+public class CheckOutDB extends DataBaseCore {
 
 
-    public PayDB(DataBaseInfo info) {
+    public CheckOutDB(DataBaseInfo info) {
         super(info);
     }
 

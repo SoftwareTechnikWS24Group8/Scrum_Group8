@@ -1,4 +1,4 @@
-package de.hse.swb8.pay.core;
+package de.hse.swb8.checkout.core;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

@@ -1,16 +1,11 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.checkout;
 
-import de.hse.swb8.pay.core.Records.VehicleType;
-import de.hse.swb8.pay.core.RowData;
-import de.hse.swb8.pay.core.observer.SimpleObservable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import de.hse.swb8.checkout.core.observer.SimpleObservable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.util.StringConverter;
+import javafx.scene.control.TextField;
 
-public class PayController extends SimpleObservable<PayState> {
+public class CheckOutController extends SimpleObservable<CheckOutState> {
 
     public static final String MAX_SLOTS_COLUMN_Name = "Alle Parkplätze";
     public static final String USABLE_SLOTS_COLUMN_Name = "Verfügbare Parkplätze";
@@ -26,7 +21,7 @@ public class PayController extends SimpleObservable<PayState> {
     {
         String ticketText = txtTicketId.getText();
 
-        PayState state = new PayState(ticketText,-1,false);
+        CheckOutState state = new CheckOutState(ticketText,-1,false);
         setChanged();
         notifyObservers(state);
     }
@@ -49,6 +44,6 @@ public class PayController extends SimpleObservable<PayState> {
     {
         setChanged();
         String ticketText = txtTicketId.getText();
-        notifyObservers(new PayState(ticketText,Float.parseFloat(txtPrice.getText()),true));
+        notifyObservers(new CheckOutState(ticketText,Float.parseFloat(txtPrice.getText()),true));
     }
 }

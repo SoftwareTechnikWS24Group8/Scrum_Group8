@@ -1,29 +1,27 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.checkout;
 
-import de.hse.swb8.pay.core.DataBaseLogin;
-import de.hse.swb8.pay.core.Records.DataBaseInfo;
-import de.hse.swb8.pay.core.Records.VehicleType;
-import de.hse.swb8.pay.core.interfaces.Callback;
-import de.hse.swb8.pay.core.observer.Observable;
-import de.hse.swb8.pay.core.observer.Observer;
+import de.hse.swb8.checkout.core.DataBaseLogin;
+import de.hse.swb8.checkout.core.Records.DataBaseInfo;
+import de.hse.swb8.checkout.core.Records.VehicleType;
+import de.hse.swb8.checkout.core.interfaces.Callback;
+import de.hse.swb8.checkout.core.observer.Observable;
+import de.hse.swb8.checkout.core.observer.Observer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.List;
 
 
-public class PayCoreSystem implements Observer<PayState> {
+public class CheckOutCoreSystem implements Observer<CheckOutState> {
 
-    PayController controller;
-    PayDB db;
+    CheckOutController controller;
+    CheckOutDB db;
 
-    public PayCoreSystem()
+    public CheckOutCoreSystem()
     {
         // Start DataBaseLogin
         DataBaseLogin dblogin = new DataBaseLogin();
@@ -33,12 +31,12 @@ public class PayCoreSystem implements Observer<PayState> {
 
     private void StartUp(DataBaseInfo info)
     {
-        db = new PayDB(info);
+        db = new CheckOutDB(info);
 
         // Start payUI
         try {
             Stage stage = new Stage();  // Create a new stage (window)
-            FXMLLoader fxmlLoader = new FXMLLoader(PayCoreSystem.class.getResource("Pay.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(CheckOutCoreSystem.class.getResource("Pay.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 750 , 550);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
@@ -57,7 +55,7 @@ public class PayCoreSystem implements Observer<PayState> {
 
 
     @Override
-    public void update(Observable<PayState> observable, PayState selectedVehicle) {
+    public void update(Observable<CheckOutState> observable, CheckOutState selectedVehicle) {
 
         if(!selectedVehicle.payed())
         {

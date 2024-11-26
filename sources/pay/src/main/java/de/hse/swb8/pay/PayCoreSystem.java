@@ -78,10 +78,11 @@ public class PayCoreSystem implements Observer<PayState> {
         Dictionary<Float,Float> prices = db.GetPriceList(type);
 
         float timeParked = db.getHoursBetweenStampFromTicketAndNow(ticket_id);
+        float alreadyPayed = db.GetAlreadyPayedMoney(ticket_id);
 
         Float applicablePrice = getPriceForTimeParked(prices, timeParked);
 
-        return applicablePrice;
+        return applicablePrice- alreadyPayed;
     }
 
     private static Float getPriceForTimeParked(Dictionary<Float, Float> prices, float timeParked) {

@@ -1,7 +1,7 @@
-package de.hse.swb8.pay.core;
+package de.hse.swb8.checkout.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.hse.swb8.pay.core.Records.DataBaseInfo;
+import de.hse.swb8.checkout.core.Records.DataBaseInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;

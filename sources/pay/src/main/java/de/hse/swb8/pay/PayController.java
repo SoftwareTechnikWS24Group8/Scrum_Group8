@@ -49,6 +49,6 @@ public class PayController extends SimpleObservable<PayState> {
     {
         setChanged();
         String ticketText = txtTicketId.getText();
-        notifyObservers(new PayState(ticketText,Float.parseFloat(txtPrice.getText()),false));
+        notifyObservers(new PayState(ticketText,Float.parseFloat(txtPrice.getText()),true));
     }
 }

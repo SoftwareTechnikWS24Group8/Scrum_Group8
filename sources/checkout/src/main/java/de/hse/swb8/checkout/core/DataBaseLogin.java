@@ -1,10 +1,10 @@
-package de.hse.swb8.pay.core;
+package de.hse.swb8.checkout.core;
 
-import de.hse.swb8.pay.PayMain;
-import de.hse.swb8.pay.core.Records.DataBaseInfo;
-import de.hse.swb8.pay.core.interfaces.Callback;
-import de.hse.swb8.pay.core.observer.Observable;
-import de.hse.swb8.pay.core.observer.Observer;
+import de.hse.swb8.checkout.CheckOutMain;
+import de.hse.swb8.checkout.core.Records.DataBaseInfo;
+import de.hse.swb8.checkout.core.interfaces.Callback;
+import de.hse.swb8.checkout.core.observer.Observable;
+import de.hse.swb8.checkout.core.observer.Observer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -56,7 +56,7 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
         System.out.println("Starting window");
         try {
             Stage stage = new Stage();  // Create a new stage (window)
-            FXMLLoader fxmlLoader = new FXMLLoader(PayMain.class.getResource("DataBaseLogin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(CheckOutMain.class.getResource("DataBaseLogin.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             stage.setResizable(false);

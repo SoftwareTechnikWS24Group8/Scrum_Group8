@@ -64,15 +64,15 @@ public class PayDB extends DataBaseCore {
 
     public Dictionary<Float,Float> GetPriceList(VehicleType selectedVehicle)
     {
-        Dictionary<Float,Float> list = new Hashtable<Float,Float>();
+        Dictionary<Float,Float> list = new Hashtable<>();
         try {
             try (Statement statement = connection.createStatement()) {
 
-                String querry = "SELECT t.time_hours, v.price " +
+                String query = "SELECT t.time_hours, v.price " +
                         "FROM scrum.hours_list t " +
                         "JOIN scrum.price_list v ON t.id = v.duration_id " +
                         "WHERE v.vehicle_type_id =" + selectedVehicle.id();
-                ResultSet resultSet = statement.executeQuery(querry);
+                ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
                     list.put(resultSet.getFloat("time_hours"),resultSet.getFloat("price"));
                 }
@@ -92,7 +92,7 @@ public class PayDB extends DataBaseCore {
 
     public float getHoursBetweenStampFromTicketAndNow(String ticket) {
         String query = "SELECT stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";
-        Timestamp stampIn = null;
+        Timestamp stampIn;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             // Set the ticket_name parameter
@@ -145,6 +145,31 @@ public class PayDB extends DataBaseCore {
         } catch (SQLException e) {
             throw new RuntimeException("Error updating payment status for ticket: " + ticket_id, e);
         }
+    }
+
+    public float GetAlreadyPayedMoney(String ticketId) {
+
+        String query = "SELECT payed_amount FROM scrum.park_list WHERE ticket_name = ?";
+        float payed_amount;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            // Set the ticket_name parameter
+            preparedStatement.setString(1, ticketId);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    payed_amount = resultSet.getFloat("payed_amount");
+
+                } else {
+                    throw new RuntimeException("No record found for the provided ticket: " + ticketId);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving timestamps from database", e);
+        }
+
+        return payed_amount;
     }
 
     /*

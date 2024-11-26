@@ -1,9 +1,9 @@
-package de.hse.swb8.pay;
+package de.hse.swb8.checkout;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class PayMain extends Application {
+public class CheckOutMain extends Application {
 
     public static void main(String[] args) {
 
@@ -13,6 +13,6 @@ public class PayMain extends Application {
     @Override
     public void start(Stage primaryStage){
 
-        PayCoreSystem coreSystem = new PayCoreSystem();
+        CheckOutCoreSystem coreSystem = new CheckOutCoreSystem();
     }
 }
