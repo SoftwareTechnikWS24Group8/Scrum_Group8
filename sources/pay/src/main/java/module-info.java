@@ -3,6 +3,7 @@ module de.hse.swb8.pay {
     requires javafx.fxml;
     requires javafx.web;
 
+    requires com.fasterxml.jackson.databind;
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -10,7 +11,19 @@ module de.hse.swb8.pay {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
+    requires annotations;
 
+    // Allow both Jackson and JavaFX FXML to access this package
+    opens de.hse.swb8.pay.core to com.fasterxml.jackson.databind, javafx.fxml;
+
+    // FXML loader needs reflective access to this package as well
     opens de.hse.swb8.pay to javafx.fxml;
+
     exports de.hse.swb8.pay;
+    exports de.hse.swb8.pay.core;
+    exports de.hse.swb8.pay.core.Records;
+    exports de.hse.swb8.pay.core.interfaces;
+    opens de.hse.swb8.pay.core.Records to com.fasterxml.jackson.databind, javafx.fxml;
+    opens de.hse.swb8.pay.core.interfaces to com.fasterxml.jackson.databind, javafx.fxml;
 }
