@@ -3,6 +3,7 @@ package de.hse.swb8.parkingSystem.pay;
 import de.hse.swb8.parkingSystem.core.observer.SimpleObservable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class PayController extends SimpleObservable<PayState> {
@@ -12,6 +13,12 @@ public class PayController extends SimpleObservable<PayState> {
 
     @FXML
     private TextField txtTicketId;
+
+    @FXML
+    private Label durationLabel;
+
+    @FXML
+    private Label timeLabel;
 
     @FXML
     private void OnBtnReadTicketPressed(ActionEvent ignoredEvent) {
@@ -31,6 +38,14 @@ public class PayController extends SimpleObservable<PayState> {
 
     @FXML
     private TextField txtPrice;
+
+    public void setTimeLabel(String time) {
+        timeLabel.setText(time);
+    }
+
+    public void setDurationLabel(String duration) {
+        durationLabel.setText(duration);
+    }
 
     public void SetPriceText(String price) {
         txtPrice.setText(price);

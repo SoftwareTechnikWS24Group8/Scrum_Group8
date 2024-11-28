@@ -8,13 +8,22 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hse.swb8.parkingSystem.checkout.CheckOutController">
     <children>
-        <Label layoutX="14.0" layoutY="21.0" prefHeight="45.0" prefWidth="174.0" text="Check Out">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Button fx:id="btnReadTicket" layoutX="375.0" layoutY="84.0" mnemonicParsing="false" onAction="#OnBtnReadTicketPressed" prefHeight="55.0" prefWidth="328.0" text="Auslesen" />
-        <TextField fx:id="txtInfo" alignment="CENTER" editable="false" layoutX="130.0" layoutY="161.0" prefHeight="62.0" prefWidth="576.0" />
-        <TextField fx:id="txtTicketId" alignment="CENTER" layoutX="131.0" layoutY="84.0" prefHeight="55.0" prefWidth="226.0" promptText="Ticket Nummer" />
+        <Button fx:id="btnReadTicket" layoutX="376.0" layoutY="174.0" mnemonicParsing="false" onAction="#OnBtnReadTicketPressed" prefHeight="59.0" prefWidth="228.0" text="Auslesen">
+         <font>
+            <Font size="22.0" />
+         </font></Button>
+        <TextField fx:id="txtInfo" alignment="CENTER" editable="false" layoutX="10.0" layoutY="258.0" prefHeight="72.0" prefWidth="732.0">
+         <font>
+            <Font size="33.0" />
+         </font></TextField>
+        <TextField fx:id="txtTicketId" alignment="CENTER" layoutX="113.0" layoutY="174.0" prefHeight="59.0" prefWidth="228.0" promptText="Ticket Nummer">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <Label layoutX="178.0" layoutY="94.0" text="Vielen Dank für Ihren Besuch">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

@@ -8,15 +8,45 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hse.swb8.parkingSystem.pay.PayController">
     <children>
-        <Label layoutX="14.0" layoutY="21.0" prefHeight="45.0" prefWidth="174.0" text="Bezahlen">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Button fx:id="btnReadTicket" layoutX="375.0" layoutY="96.0" mnemonicParsing="false" onAction="#OnBtnReadTicketPressed" prefHeight="50.0" prefWidth="235.0" text="Auslesen" />
-        <TextField fx:id="txtInfo" alignment="CENTER" editable="false" layoutX="120.0" layoutY="171.0" prefHeight="50.0" prefWidth="496.0" promptText="Informationen" />
-        <TextField fx:id="txtTicketId" alignment="CENTER" layoutX="120.0" layoutY="96.0" prefHeight="50.0" prefWidth="235.0" promptText="Ticket Nummer" />
-        <TextField fx:id="txtPrice" alignment="CENTER" editable="false" layoutX="120.0" layoutY="238.0" prefHeight="50.0" promptText="Preis" />
-        <Button fx:id="btnPay" layoutX="381.0" layoutY="238.0" mnemonicParsing="false" onAction="#OnBtnPayPressed" prefHeight="50.0" prefWidth="235.0" text="Bezahlen" />
+        <Button fx:id="btnReadTicket" layoutX="375.0" layoutY="96.0" mnemonicParsing="false" onAction="#OnBtnReadTicketPressed" prefHeight="59.0" prefWidth="228.0" text="Auslesen">
+         <font>
+            <Font size="22.0" />
+         </font></Button>
+        <TextField fx:id="txtInfo" alignment="CENTER" editable="false" layoutX="9.0" layoutY="181.0" prefHeight="72.0" prefWidth="732.0" promptText="Informationen">
+         <font>
+            <Font size="33.0" />
+         </font></TextField>
+        <TextField fx:id="txtTicketId" alignment="CENTER" layoutX="127.0" layoutY="96.0" prefHeight="59.0" prefWidth="228.0" promptText="Ticket Nummer">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+        <TextField fx:id="txtPrice" alignment="CENTER" editable="false" layoutX="10.0" layoutY="274.0" prefHeight="72.0" prefWidth="351.0" promptText="Preis">
+         <font>
+            <Font size="33.0" />
+         </font></TextField>
+        <Button fx:id="btnPay" layoutX="375.0" layoutY="274.0" mnemonicParsing="false" onAction="#OnBtnPayPressed" prefHeight="72.0" prefWidth="367.0" text="Bezahlen">
+         <font>
+            <Font size="33.0" />
+         </font></Button>
+      <Label layoutX="244.0" layoutY="369.0" text="Park Dauer">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="241.0" layoutY="419.0" text="Ankunfszeit">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="durationLabel" layoutX="380.0" layoutY="369.0" text="00:00h">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="timeLabel" layoutX="380.0" layoutY="419.0" text="00:00h">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
