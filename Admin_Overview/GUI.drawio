@@ -1,106 +1,106 @@
 <mxfile host="65bd71144e">
     <diagram id="QjeC8d4777Bhq6Ht5Hzo" name="Page-1">
-        <mxGraphModel dx="856" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1347" dy="907" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="80" y="80" width="120" height="440" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="" style="rounded=0;whiteSpace=wrap;html=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="1">
+                <mxCell id="3" value="" style="rounded=0;whiteSpace=wrap;html=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;connectable=0;" parent="1" vertex="1">
                     <mxGeometry x="200" y="80" width="770" height="440" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="Parking Lot Manager" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="4" value="Parking Lot Manager" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="80" y="80" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="Existing ParkingLots" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="5" value="Existing ParkingLots" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="80" y="130" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="Dropdown for existing" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="6" value="Dropdown for existing" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="80" y="170" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="Create New Button" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="9" value="Create New Button" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="80" y="270" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" value="This part is by default all inactive and gets activated when needed" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                <mxCell id="10" value="This part is by default all inactive and gets activated when needed" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="260" y="30" width="370" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" value="Text Field Parking Lot Name" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="11" value="Text Field Parking Lot Name" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="210" y="90" width="200" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="ElektricCar Slots:" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="13" value="ElektricCar Slots:" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="310" y="130" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="Family Car Slots" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="15" value="Family Car Slots" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="440" y="130" width="130" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="18" value="Spinner Number" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="18" value="Spinner Number" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="580" y="170" width="100" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="19" value="Motorcycle" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="19" value="Motorcycle" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="720" y="130" width="130" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="Spinner Number" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="20" value="Spinner Number" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="720" y="180" width="100" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="21" value="Price textfield" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="21" value="Price textfield" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="310" y="260" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="22" value="15 Minutes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="22" value="15 Minutes" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="240" y="260" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" value="1 hour" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="23" value="1 hour" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="240" y="300" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="24" value="2 hour" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="24" value="2 hour" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="240" y="335" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="plus hour" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="25" value="plus hour" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="240" y="370" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="max day" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="26" value="max day" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="240" y="410" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="27" value="...." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="27" value="...." style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="384" y="330" width="60" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="Spinner Number" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="29" value="Spinner Number" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="440" y="170" width="100" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="Currently Used" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="30" value="Currently Used" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="240" y="220" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" value="lbl amount" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="31" value="lbl amount" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="310" y="220" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="lbl amount" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="32" value="lbl amount" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="450" y="220" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="33" value="lbl amount" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="33" value="lbl amount" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="590" y="220" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="34" value="lbl amount" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="34" value="lbl amount" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="720" y="230" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="35" value="Save Button" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="35" value="Save Button" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="840" y="480" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="36" value="Horizontal Container" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="36" value="Horizontal Container" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="210" y="130" width="740" height="330" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="Spinner Number" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="36">
+                <mxCell id="28" value="Spinner Number" style="rounded=0;whiteSpace=wrap;html=1;" parent="36" vertex="1">
                     <mxGeometry x="100" y="40" width="100" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="Small" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="36">
+                <mxCell id="17" value="Small" style="rounded=0;whiteSpace=wrap;html=1;" parent="36" vertex="1">
                     <mxGeometry x="370" width="130" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" value="Start new fiscal year" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="38" value="Start new fiscal year" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="385" y="480" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="39" value="MOney in fiscal textfield" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="39" value="Money in fiscal textfield" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="240" y="480" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="40" value="Date Picker" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="40" value="Date Picker" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="510" y="480" width="120" height="30" as="geometry"/>
                 </mxCell>
             </root>
