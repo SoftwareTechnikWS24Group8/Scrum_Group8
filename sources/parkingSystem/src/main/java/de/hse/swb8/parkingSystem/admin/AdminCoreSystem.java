@@ -33,7 +33,7 @@ public class AdminCoreSystem implements Observer<VehicleType> {
         try {
             Stage stage = new Stage();  // Create a new stage (window)
             FXMLLoader fxmlLoader = new FXMLLoader(AdminCoreSystem.class.getResource("Admin.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 750, 550);
+            Scene scene = new Scene(fxmlLoader.load(), 1500, 1010);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
             stage.setTitle("Check In");

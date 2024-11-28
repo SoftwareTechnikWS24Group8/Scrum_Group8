@@ -13,10 +13,7 @@
     <url>https://github.com/SoftwareTechnikWS24Group8/Scrum_Group8</url>
 
     <modules>
-        <module>AdminPanel</module>
         <module>parkingSystem</module>
-        <module>CheckOut</module>
-        <module>Pay</module>
     </modules>
 
     <dependencyManagement>

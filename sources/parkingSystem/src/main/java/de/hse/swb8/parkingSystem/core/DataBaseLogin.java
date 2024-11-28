@@ -55,7 +55,7 @@ public class DataBaseLogin implements Observer<DataBaseInfo> {
         System.out.println("Starting window");
         try {
             Stage stage = new Stage();  // Create a new stage (window)
-            FXMLLoader fxmlLoader = new FXMLLoader(CheckInMain.class.getResource("DataBaseLogin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(DataBaseCore.class.getResource("DataBaseLogin.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             stage.setResizable(false);
