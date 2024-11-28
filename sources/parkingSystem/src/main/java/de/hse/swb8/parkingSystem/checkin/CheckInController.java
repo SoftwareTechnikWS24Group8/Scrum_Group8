@@ -71,6 +71,10 @@ public class CheckInController extends SimpleObservable<VehicleType> {
     @FXML
     private TextField txtInfo;
 
+    public void setTextSize(int size) {
+        txtInfo.setStyle("-fx-font-size: " + size + "px;");
+    }
+
     public void SetMessage(String message) {
         txtInfo.setText(message);
     }

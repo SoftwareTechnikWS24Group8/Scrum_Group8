@@ -86,7 +86,7 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
 
     @Override
     public void update(Observable<VehicleType> observable, VehicleType selectedVehicle) {
-
+        controller.setTextSize(33);
         if (selectedVehicle == null) {
             return;
         }
@@ -101,6 +101,7 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
 
             PopulatePrices();
         } else {
+            controller.setTextSize(22);
             controller.SetMessage("Leider gibt es keine Parkmöglichkeit für dieses Auto");
         }
     }
