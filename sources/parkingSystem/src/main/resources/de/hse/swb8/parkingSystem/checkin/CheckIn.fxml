@@ -6,16 +6,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hse.swb8.parkingSystem.checkin.CheckInController">
     <children>
-        <Button fx:id="btnDriveIn" layoutX="501.0" layoutY="310.0" mnemonicParsing="false" onAction="#OnBtnDriveInPressed" prefHeight="98.0" prefWidth="235.0" text="EInfahren" />
+        <Button fx:id="btnDriveIn" layoutX="501.0" layoutY="310.0" mnemonicParsing="false" onAction="#OnBtnDriveInPressed" prefHeight="98.0" prefWidth="240.0" text="EInfahren" />
         <ChoiceBox fx:id="dpdVehicleChoice" layoutX="9.0" layoutY="318.0" prefHeight="82.0" prefWidth="399.0">
             <effect>
                 <Glow />
             </effect>
         </ChoiceBox>
         <TableView fx:id="tabTablePrices" layoutX="10.0" layoutY="21.0" prefHeight="276.0" prefWidth="732.0" />
-        <TextField fx:id="txtInfo" alignment="CENTER" editable="false" layoutX="14.0" layoutY="436.0" prefHeight="98.0" prefWidth="534.0" />
+        <TextField fx:id="txtInfo" alignment="CENTER" editable="false" layoutX="9.0" layoutY="436.0" prefHeight="98.0" prefWidth="732.0">
+         <font>
+            <Font size="22.0" />
+         </font></TextField>
     </children>
 </AnchorPane>
