@@ -40,6 +40,7 @@ public class PayController extends SimpleObservable<PayState> {
     void OnBtnPayPressed(ActionEvent ignoredEvent) {
         setChanged();
         String ticketText = txtTicketId.getText();
-        notifyObservers(new PayState(ticketText, Float.parseFloat(txtPrice.getText()), true));
+        String priceText = txtPrice.getText().replace("€", "").trim();
+        notifyObservers(new PayState(ticketText, Float.parseFloat(priceText), true));
     }
 }

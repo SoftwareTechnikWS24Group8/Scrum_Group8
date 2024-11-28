@@ -54,15 +54,16 @@ public class PayCoreSystem implements Observer<PayState> {
 
     @Override
     public void update(Observable<PayState> observable, PayState selectedVehicle) {
-
+        controller.SetInfoText("");
         if (!selectedVehicle.payed()) {
             if (db.DoesTicketExistValid(selectedVehicle.ticket_id())) {
-                controller.SetPriceText(GetPrice(selectedVehicle.ticket_id()) + "");
+                controller.SetPriceText(GetPrice(selectedVehicle.ticket_id()) + " €");
             } else {
                 controller.SetInfoText("Dieses Ticket existiert nicht");
             }
         } else {
             db.SetPayed(selectedVehicle.ticket_id(), selectedVehicle.priceInEuro());
+            controller.SetInfoText("Ticket Bezahlt!");
         }
     }
 

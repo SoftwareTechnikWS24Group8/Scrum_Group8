@@ -1,11 +1,13 @@
 package de.hse.swb8.parkingSystem.checkin;
 
+import atlantafx.base.theme.PrimerDark;
 import de.hse.swb8.parkingSystem.core.DataBaseLogin;
 import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 import de.hse.swb8.parkingSystem.core.interfaces.Callback;
 import de.hse.swb8.parkingSystem.core.observer.Observable;
 import de.hse.swb8.parkingSystem.core.observer.Observer;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
