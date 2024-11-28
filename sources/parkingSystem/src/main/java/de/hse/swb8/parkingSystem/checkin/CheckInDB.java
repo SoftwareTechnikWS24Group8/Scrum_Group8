@@ -20,9 +20,9 @@ public class CheckInDB extends DataBaseCore {
         String Ticket = "";
 
         try {
-            String query = "INSERT INTO scrum.park_list (vehicle_type_id, stamp_in_time, stamp_out_time, has_payed, pay_time) " +
-                    "VALUES (?, ?, NULL, ?, NULL)";
-            String updateQuery = "UPDATE scrum.park_list SET ticket_name = ? WHERE id = ?";
+            String query = "INSERT INTO scrum.park_list (vehicle_type_id, stamp_in_time, stamp_out_time, pay_time) " +
+                    "VALUES (?, ?, NULL, NULL)";
+            String updateQuery = "UPDATE scrum.park_list SET ticket_name = ? WHERE park_id = ?";
 
             // Use a PreparedStatement for the SQL query
             try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -33,7 +33,6 @@ public class CheckInDB extends DataBaseCore {
                 int quersumme = calculateQuersumme(currentTime.getTime());
                 preparedStatement.setInt(1, selectedVehicle.id()); // vehicle_type_id
                 preparedStatement.setTimestamp(2, currentTime);    // stamp_in_time
-                preparedStatement.setBoolean(3, false);            // has_payed
 
                 // Execute the insert statement
                 int affectedRows = preparedStatement.executeUpdate();
@@ -90,7 +89,7 @@ public class CheckInDB extends DataBaseCore {
 
                 String querry = "SELECT t.time_hours, v.price " +
                         "FROM scrum.hours_list t " +
-                        "JOIN scrum.price_list v ON t.id = v.duration_id " +
+                        "JOIN scrum.price_list v ON t.time_id = v.time_id " +
                         "WHERE v.vehicle_type_id =" + selectedVehicle.id();
                 ResultSet resultSet = statement.executeQuery(querry);
                 while (resultSet.next()) {
@@ -117,7 +116,7 @@ public class CheckInDB extends DataBaseCore {
                 String querry = "SELECT * FROM scrum.hours_list";
                 ResultSet resultSet = statement.executeQuery(querry);
                 while (resultSet.next()) {
-                    list.put(resultSet.getInt("id"), resultSet.getFloat("time_hours"));
+                    list.put(resultSet.getInt("time_id"), resultSet.getFloat("time_hours"));
                 }
             }
         } catch (SQLException e) {
@@ -137,7 +136,7 @@ public class CheckInDB extends DataBaseCore {
         try {
             try (Statement statement = connection.createStatement()) {
 
-                String querry = "SELECT SUM(spot_amount) AS total_spots FROM scrum.park_spots WHERE vehicle_type_id =" + vehicleType.id();
+                String querry = "SELECT SUM(amount) AS total_spots FROM scrum.park_spots WHERE vehicle_type_id =" + vehicleType.id();
                 ResultSet resultSet = statement.executeQuery(querry);
                 if (resultSet.next()) {
                     maxAmount = resultSet.getInt("total_spots");

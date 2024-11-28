@@ -38,7 +38,7 @@ public class DataBaseCore {
 
                 while (resultSet.next()) {
                     int vehicle_type_id = resultSet.getInt("vehicle_type_id");
-                    String vehicle_display_name = resultSet.getString("display_name");
+                    String vehicle_display_name = resultSet.getString("name");
                     VehicleType temp = new VehicleType(vehicle_type_id, vehicle_display_name);
                     vehicleTypes.add(temp);
                 }

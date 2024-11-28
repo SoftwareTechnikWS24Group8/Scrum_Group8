@@ -120,21 +120,20 @@ public class CheckOutDB extends DataBaseCore {
 
 
     public void AddRowToPayedList(String ticket, float payedInEuro) {
-        String selectQuery = "SELECT id, vehicle_type_id, stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";
-        String insertQuery = "INSERT INTO scrum.payed_list (vehicle_type_id, ticket_id, payed_in_euro, parked_time) VALUES (?, ?, ?, ?)";
+        String selectQuery = "SELECT park_id, vehicle_type_id, stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";
+        String insertQuery = "INSERT INTO scrum.payed_list (vehicle_type_id, ticket_name, payed_amount, parked_time) VALUES (?, ?, ?, ?)";
+
+        int vehicleTypeId;
+        Timestamp stampIn;
+        Timestamp stampOut;
 
         try {
             // Step 1: Retrieve data from park_list
-            int vehicleTypeId;
-            Timestamp stampIn;
-            Timestamp stampOut;
-            int ticketId;
 
             try (PreparedStatement selectStmt = connection.prepareStatement(selectQuery)) {
                 selectStmt.setString(1, ticket);
                 try (ResultSet resultSet = selectStmt.executeQuery()) {
                     if (resultSet.next()) {
-                        ticketId = resultSet.getInt("id");
                         vehicleTypeId = resultSet.getInt("vehicle_type_id");
                         stampIn = resultSet.getTimestamp("stamp_in_time");
                         stampOut = resultSet.getTimestamp("stamp_out_time");
@@ -147,6 +146,12 @@ public class CheckOutDB extends DataBaseCore {
                     }
                 }
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Could not get all data " + ticket, e);
+        }
+
+        try{
 
             // Step 2: Calculate parked time in hours
             float parkedTime = calculateHoursBetweenTimestamps(stampIn, stampOut);

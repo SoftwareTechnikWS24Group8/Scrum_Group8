@@ -68,7 +68,7 @@ public class PayDB extends DataBaseCore {
 
                 String query = "SELECT t.time_hours, v.price " +
                         "FROM scrum.hours_list t " +
-                        "JOIN scrum.price_list v ON t.id = v.duration_id " +
+                        "JOIN scrum.price_list v ON t.time_id = v.time_id " +
                         "WHERE v.vehicle_type_id =" + selectedVehicle.id();
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
@@ -142,14 +142,13 @@ public class PayDB extends DataBaseCore {
         }
 
 
-        query = "UPDATE scrum.park_list SET has_payed = ?, pay_time = ?, payed_amount = ? WHERE ticket_name = ?";
+        query = "UPDATE scrum.park_list SET pay_time = ?, payed_amount = ? WHERE ticket_name = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             // Set the parameters
-            preparedStatement.setBoolean(1, true); // Set has_payed to true
-            preparedStatement.setTimestamp(2, new Timestamp(System.currentTimeMillis())); // Set payed_time to current time
-            preparedStatement.setFloat(3, payed_amount + alreadyPayed); // Set payed_time to current time
-            preparedStatement.setString(4, ticket_id); // Specify the ticket_name
+            preparedStatement.setTimestamp(1, new Timestamp(System.currentTimeMillis())); // Set payed_time to current time
+            preparedStatement.setFloat(2, payed_amount + alreadyPayed); // Set payed_time to current time
+            preparedStatement.setString(3, ticket_id); // Specify the ticket_name
 
             // Execute the update
             int affectedRows = preparedStatement.executeUpdate();
