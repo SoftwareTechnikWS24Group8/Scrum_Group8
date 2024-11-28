@@ -9,3 +9,5 @@ log \n
 
 
 e ladeseule
+
+zeit ordentlicher anzeigen anstatt 0.25 _> 0:15
