@@ -25,7 +25,7 @@ public class DataBaseLoginController extends SimpleObservable<DataBaseInfo> {
         LocalTime time = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String timestamp = time.format(formatter);
-        txaLog.appendText(timestamp + ": " + msg);
+        txaLog.appendText("\n"+timestamp + ": " + msg);
     }
 
     @FXML
