@@ -37,7 +37,7 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
         // Start CheckInUI
         try {
             Stage stage = new Stage();  // Create a new stage (window)
-            FXMLLoader fxmlLoader = new FXMLLoader(CheckInCoreSystem.class.getResource("Admin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(CheckInCoreSystem.class.getResource("CheckIn.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 750, 550);
             stage.setResizable(false);
             stage.initStyle(StageStyle.UNIFIED);
