@@ -2,6 +2,9 @@
 
 ## Project Phases (1)
 
+Welcome to agile
+(https://www.youtube.com/shorts/lmZIUBFOiEI)
+
 Goal: A parking deck application that represents a real parking
 deck
 
