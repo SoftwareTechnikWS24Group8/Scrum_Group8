@@ -61,7 +61,7 @@ public class CheckOutCoreSystem implements Observer<String> {
                 if (timer_after_payment > TIME_AFTER_PAYMENT) {
                     controller.SetInfoText("Zeit überschreitung zahle erneut");
                 } else {
-                    controller.SetInfoText("GuteFahrt");
+                    controller.SetInfoText("Gute Fahrt!");
                     System.out.println("Schranke Auf _------------");
                     db.SetCheckoutTime(ticketId);
 

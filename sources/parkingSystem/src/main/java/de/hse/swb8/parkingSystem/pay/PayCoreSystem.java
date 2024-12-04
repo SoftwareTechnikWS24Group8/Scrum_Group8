@@ -54,15 +54,17 @@ public class PayCoreSystem implements Observer<PayState> {
 
     @Override
     public void update(Observable<PayState> observable, PayState selectedVehicle) {
-
+        controller.SetInfoText("");
         if (!selectedVehicle.payed()) {
             if (db.DoesTicketExistValid(selectedVehicle.ticket_id())) {
-                controller.SetPriceText(GetPrice(selectedVehicle.ticket_id()) + "");
+                controller.SetPriceText(GetPrice(selectedVehicle.ticket_id()) + " €");
+                controller.setDurationLabel(getDuration(selectedVehicle.ticket_id()));
             } else {
                 controller.SetInfoText("Dieses Ticket existiert nicht");
             }
         } else {
             db.SetPayed(selectedVehicle.ticket_id(), selectedVehicle.priceInEuro());
+            controller.SetInfoText("Ticket Bezahlt!");
         }
     }
 
@@ -76,6 +78,14 @@ public class PayCoreSystem implements Observer<PayState> {
         Float applicablePrice = getPriceForTimeParked(prices, timeParked);
 
         return applicablePrice - alreadyPayed;
+    }
+
+    public String getDuration(String ticket_id) {
+        float timeParked = db.GetHoursBetweenStampFromTicketAndNow(ticket_id);
+        int hours = (int) timeParked;
+        int minutes = (int) ((timeParked - hours) * 60);
+
+        return String.format("%02d:%02dh", hours, minutes);
     }
 
     private static Float getPriceForTimeParked(Dictionary<Float, Float> prices, float timeParked) {

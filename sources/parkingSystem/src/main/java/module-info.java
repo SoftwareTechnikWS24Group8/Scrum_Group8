@@ -1,5 +1,4 @@
 module de.hse.swb8.parkingSystem {
-    requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
 
@@ -13,6 +12,7 @@ module de.hse.swb8.parkingSystem {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires annotations;
+    requires atlantafx.base;
 
     //checkout
     opens de.hse.swb8.parkingSystem.checkout;
