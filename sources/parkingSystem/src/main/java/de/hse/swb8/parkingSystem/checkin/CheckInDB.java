@@ -101,8 +101,7 @@ public class CheckInDB extends DataBaseCore {
         }
 
         if (list.isEmpty()) {
-            System.out.println("No rows found");
-            System.exit(1);
+            System.out.println("No rows found for" + selectedVehicle.displayName());
         }
         // 3 hours > 2.3€
         return list;
