@@ -17,9 +17,12 @@ public class CheckOutCoreSystem implements Observer<String> {
 
     private static final float TIME_AFTER_PAYMENT = 0.17f; // ~10 Minunten
 
-
     CheckOutController controller;
     CheckOutDB db;
+
+    public static float getTIME_AFTER_PAYMENT(){
+        return TIME_AFTER_PAYMENT;
+    }
 
     public CheckOutCoreSystem() {
         // Start DataBaseLogin
