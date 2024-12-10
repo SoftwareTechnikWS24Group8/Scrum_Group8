@@ -1,5 +1,6 @@
 package de.hse.swb8.parkingSystem.admin;
 
+import de.hse.swb8.parkingSystem.core.DataBaseCore;
 import de.hse.swb8.parkingSystem.core.DataBaseLogin;
 import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 import de.hse.swb8.parkingSystem.core.Records.VehicleType;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Date;
 
 
 public class AdminCoreSystem implements Observer<VehicleType> {
@@ -47,6 +49,16 @@ public class AdminCoreSystem implements Observer<VehicleType> {
         }
 
     }
+    
+    public void MoneyMade(Date date) {
+        if (db != null) {
+            double revenue = db.GetRevenueSinceDate(date);
+            System.out.println("Total revenue since " + date + ": " + revenue);
+        } else {
+            System.out.println("Database connection is not initialized.");
+        }
+    }
+
 
     @Override
     public void update(Observable<VehicleType> observable, VehicleType selectedVehicle) {
