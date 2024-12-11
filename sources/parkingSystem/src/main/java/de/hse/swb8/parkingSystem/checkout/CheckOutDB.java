@@ -3,10 +3,7 @@ package de.hse.swb8.parkingSystem.checkout;
 import de.hse.swb8.parkingSystem.core.DataBaseCore;
 import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 
 public class CheckOutDB extends DataBaseCore {
 
@@ -121,7 +118,7 @@ public class CheckOutDB extends DataBaseCore {
 
     public void AddRowToPayedList(String ticket, float payedInEuro) {
         String selectQuery = "SELECT park_id, vehicle_type_id, stamp_in_time, stamp_out_time FROM scrum.park_list WHERE ticket_name = ?";
-        String insertQuery = "INSERT INTO scrum.payed_list (vehicle_type_id, ticket_name, payed_amount, parked_time) VALUES (?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO scrum.payed_list (vehicle_type_id, ticket_name, payed_amount, parked_time, parked_start_date) VALUES (?, ?, ?, ?, ?)";
 
         int vehicleTypeId;
         Timestamp stampIn;
@@ -162,6 +159,7 @@ public class CheckOutDB extends DataBaseCore {
                 insertStmt.setString(2, ticket);    // ticket_id
                 insertStmt.setFloat(3, payedInEuro); // payed_in_euro
                 insertStmt.setFloat(4, parkedTime);  // parked_time
+                insertStmt.setDate(5, Date.valueOf(stampIn.toLocalDateTime().toLocalDate()));  // date start parking
 
                 int rowsInserted = insertStmt.executeUpdate();
                 if (rowsInserted == 0) {

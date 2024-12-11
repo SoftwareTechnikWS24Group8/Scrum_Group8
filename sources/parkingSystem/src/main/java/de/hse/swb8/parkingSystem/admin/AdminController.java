@@ -8,13 +8,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.StringConverter;
 
-public class AdminController extends SimpleObservable<VehicleType> {
+import java.time.LocalDate;
+
+public class AdminController extends SimpleObservable<AdminControllerEvent> {
 
     public static final String MAX_SLOTS_COLUMN_Name = "Alle Parkplätze";
     public static final String USABLE_SLOTS_COLUMN_Name = "Verfügbare Parkplätze";
@@ -71,12 +70,28 @@ public class AdminController extends SimpleObservable<VehicleType> {
         txtInfo.setText(message);
     }
 
+    @FXML
+    private DatePicker datepickerYearStart;
+
+    public LocalDate GetYearStarted()
+    {
+        return datepickerYearStart.getValue();
+    }
 
     @FXML
-    private void OnBtnDriveInPressed(ActionEvent ignoredEvent) {
+    private void OnActionDatePickerYearStart(ActionEvent ignored) {
+
         setChanged();
-        notifyObservers(dpdVehicleChoice.getValue());
+        notifyObservers(AdminControllerEvent.YearStartChanged);
+
     }
+    @FXML
+    private TextField txtMoneyMade;
+
+    public void SetTxtMoneyMade(String txtMoneyMade) {
+        this.txtMoneyMade.setText(txtMoneyMade);
+    }
+
 
     @FXML
     private ChoiceBox<VehicleType> dpdVehicleChoice;

@@ -1,6 +1,5 @@
 package de.hse.swb8.parkingSystem.admin;
 
-import de.hse.swb8.parkingSystem.core.DataBaseCore;
 import de.hse.swb8.parkingSystem.core.DataBaseLogin;
 import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 import de.hse.swb8.parkingSystem.core.Records.VehicleType;
@@ -13,10 +12,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
-public class AdminCoreSystem implements Observer<VehicleType> {
+public class AdminCoreSystem implements Observer<AdminControllerEvent> {
 
     AdminController controller;
     AdminDB db;
@@ -47,21 +47,33 @@ public class AdminCoreSystem implements Observer<VehicleType> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
     
-    public void MoneyMade(Date date) {
+    public double MoneyMade(LocalDate date) {
+        double revenue = 0;
         if (db != null) {
-            double revenue = db.GetRevenueSinceDate(date);
+            revenue = db.GetRevenueSinceDate(date);
             System.out.println("Total revenue since " + date + ": " + revenue);
+
         } else {
             System.out.println("Database connection is not initialized.");
         }
+        return revenue;
     }
 
 
     @Override
-    public void update(Observable<VehicleType> observable, VehicleType selectedVehicle) {
+    public void update(Observable<AdminControllerEvent> observable, AdminControllerEvent selectedVehicle) {
+
+        switch (selectedVehicle)
+        {
+            case YearStartChanged -> {
+                LocalDate yearstart = controller.GetYearStarted();
+                double revenue = MoneyMade(yearstart);
+                controller.SetTxtMoneyMade(revenue+"");
+
+            }
+        }
 
     }
 }
