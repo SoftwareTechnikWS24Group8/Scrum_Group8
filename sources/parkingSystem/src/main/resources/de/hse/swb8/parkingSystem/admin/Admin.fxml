@@ -17,7 +17,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Button fx:id="btnDriveIn" layoutX="1323.0" layoutY="888.0" mnemonicParsing="false" onAction="#OnBtnDriveInPressed" prefHeight="98.0" prefWidth="159.0" text="Speichern" />
+        <Button fx:id="btnDriveIn" layoutX="1323.0" layoutY="888.0" mnemonicParsing="false" prefHeight="98.0" prefWidth="159.0" text="Speichern" />
         <TableView fx:id="tabTablePrices" editable="true" layoutX="235.0" layoutY="14.0" prefHeight="335.0" prefWidth="695.0" />
       <TitledPane animated="false" layoutX="-359.0" layoutY="44.0" text="untitled" />
       <Button fx:id="btnDriveIn1" layoutX="221.0" layoutY="943.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="159.0" text="Aus DatenBank Ausloggen" />
@@ -26,13 +26,13 @@
       <TableView fx:id="tabTablePrices1" editable="true" layoutX="235.0" layoutY="367.0" prefHeight="293.0" prefWidth="695.0" />
       <Button fx:id="btnDriveIn111" layoutX="552.0" layoutY="943.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="159.0" text="Neues Zeit Fenster" />
       <Button fx:id="btnDriveIn1111" layoutX="386.0" layoutY="943.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="159.0" text="Zeit Fenster löschen" />
-      <Button fx:id="btnDriveIn112" layoutX="386.0" layoutY="900.0" mnemonicParsing="false" onAction="#OnBtnDriveInPressed" prefHeight="37.0" prefWidth="159.0" text="Fahrzeug Löschen" />
+      <Button fx:id="btnDriveIn112" layoutX="386.0" layoutY="900.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="159.0" text="Fahrzeug Löschen" />
       <Label layoutX="952.0" layoutY="21.0" text="Einnahmen:" />
       <TableView fx:id="tabTablePrices2" layoutX="952.0" layoutY="98.0" prefHeight="449.0" prefWidth="533.0" />
-      <Button fx:id="btnDriveIn113" layoutX="952.0" layoutY="943.0" mnemonicParsing="false" onAction="#OnBtnDriveInPressed" prefHeight="37.0" prefWidth="159.0" text="Neus Jahr Starten" />
-      <Label layoutX="1273.0" layoutY="62.0" text="Jahr Start" />
+      <Button fx:id="btnDriveIn113" layoutX="952.0" layoutY="943.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="159.0" text="Neus Jahr Starten" />
+      <Label layoutX="1181.0" layoutY="62.0" text="Jahr Start" />
       <TextField fx:id="txtMoneyMade" editable="false" layoutX="952.0" layoutY="557.0" />
       <Label layoutX="1111.0" layoutY="561.0" text="€" />
-      <DatePicker fx:id="datepickerYearStart" layoutX="1318.0" layoutY="58.0" onAction="#OnActionDatePickerYearStart" />
+      <DatePicker fx:id="datepickerYearStart" layoutX="1236.0" layoutY="58.0" onAction="#OnActionDatePickerYearStart" />
     </children>
 </AnchorPane>

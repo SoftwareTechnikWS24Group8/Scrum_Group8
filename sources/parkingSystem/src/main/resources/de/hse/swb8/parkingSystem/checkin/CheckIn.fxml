@@ -14,7 +14,7 @@
          <font>
             <Font size="22.0" />
          </font></Button>
-        <ChoiceBox fx:id="dpdVehicleChoice" layoutX="9.0" layoutY="318.0" prefHeight="82.0" prefWidth="399.0">
+        <ChoiceBox fx:id="dpdVehicleChoice" layoutX="9.0" layoutY="318.0" prefHeight="60.0" prefWidth="399.0">
             <effect>
                 <Glow />
             </effect>
@@ -24,5 +24,15 @@
          <font>
             <Font size="33.0" />
          </font></TextField>
+      <ChoiceBox fx:id="dpdStyle" layoutX="14.0" layoutY="392.0" prefHeight="24.0" prefWidth="200.0">
+         <effect>
+            <Glow />
+         </effect>
+      </ChoiceBox>
+      <Button fx:id="btnStyle" layoutX="214.0" layoutY="392.0" mnemonicParsing="false" onAction="#OnBtnStylePressed" prefHeight="30.0" prefWidth="68.0" text="Setze">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

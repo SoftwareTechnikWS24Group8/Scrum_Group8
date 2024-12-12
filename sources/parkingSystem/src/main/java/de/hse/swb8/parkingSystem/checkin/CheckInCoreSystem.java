@@ -7,6 +7,8 @@ import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 import de.hse.swb8.parkingSystem.core.interfaces.Callback;
 import de.hse.swb8.parkingSystem.core.observer.Observable;
 import de.hse.swb8.parkingSystem.core.observer.Observer;
+import de.hse.swb8.parkingSystem.core.styles.UiStyler;
+import de.hse.swb8.parkingSystem.core.styles.Uistyles;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,7 +21,7 @@ import java.util.Dictionary;
 import java.util.List;
 
 
-public class CheckInCoreSystem implements Observer<VehicleType> {
+public class CheckInCoreSystem implements Observer<DriveInEvent> {
 
     CheckInController controller;
     CheckInDB db;
@@ -82,27 +84,36 @@ public class CheckInCoreSystem implements Observer<VehicleType> {
         Float[] sortedArray = values.toArray(new Float[0]);
 
         controller.PopulatePrices(priceLists, sortedArray);
+        controller.PopulateStyleDropDown();
     }
 
     @Override
-    public void update(Observable<VehicleType> observable, VehicleType selectedVehicle) {
-        controller.setTextSize(33);
-        if (selectedVehicle == null) {
-            return;
-        }
+    public void update(Observable<DriveInEvent> observable, DriveInEvent selectedDriveInEvent) {
 
-        if (db.CheckSpotsNotUsed(selectedVehicle) > 0) {
-            String ticketID = db.AddParkingVehicle(selectedVehicle);
-            controller.SetMessage("Ticket ist: " + ticketID);
+        if(selectedDriveInEvent == DriveInEvent.DriveIn) {
+            controller.setTextSize(33);
+            VehicleType selectedVehicle = controller.GetSelectedVehicle();
+            if (selectedVehicle == null) {
+                return;
+            }
 
-            //TODO Start 20 second thread to clear data from gui
+            if (db.CheckSpotsNotUsed(selectedVehicle) > 0) {
+                String ticketID = db.AddParkingVehicle(selectedVehicle);
+                controller.SetMessage("Ticket ist: " + ticketID);
 
-            System.out.println("OpenDoor Checkin");
+                //TODO Start 20 second thread to clear data from gui
 
-            PopulatePrices();
-        } else {
-            controller.setTextSize(22);
-            controller.SetMessage("Leider gibt es keine Parkmöglichkeit für dieses Auto");
+                System.out.println("OpenDoor Checkin");
+
+                PopulatePrices();
+            } else {
+                controller.setTextSize(22);
+                controller.SetMessage("Leider gibt es keine Parkmöglichkeit für dieses Auto");
+            }
+        }else if(selectedDriveInEvent == DriveInEvent.StyleChanged)
+        {
+            Uistyles style = controller.GetSelectedStyle();
+            UiStyler.setUIStyle(style);
         }
     }
 }

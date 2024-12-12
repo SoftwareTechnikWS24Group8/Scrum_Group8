@@ -1,8 +1,12 @@
 package de.hse.swb8.parkingSystem.checkin;
 
+import atlantafx.base.theme.CupertinoDark;
+import atlantafx.base.theme.Dracula;
 import de.hse.swb8.parkingSystem.core.Records.VehicleType;
 import de.hse.swb8.parkingSystem.core.RowData;
 import de.hse.swb8.parkingSystem.core.observer.SimpleObservable;
+import de.hse.swb8.parkingSystem.core.styles.Uistyles;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
-public class CheckInController extends SimpleObservable<VehicleType> {
+public class CheckInController extends SimpleObservable<DriveInEvent> {
 
     public static final String MAX_SLOTS_COLUMN_Name = "Alle Parkplätze";
     public static final String USABLE_SLOTS_COLUMN_Name = "Verfügbare Parkplätze";
@@ -25,6 +29,7 @@ public class CheckInController extends SimpleObservable<VehicleType> {
 
     @FXML
     private TableView<RowData> tabTablePrices;
+
 
     public void PopulatePrices(VehiclePriceList[] priceLists, Float[] times_in_hours) {
         tabTablePrices.getColumns().clear();
@@ -82,11 +87,14 @@ public class CheckInController extends SimpleObservable<VehicleType> {
     @FXML
     private void OnBtnDriveInPressed(ActionEvent ignoredEvent) {
         setChanged();
-        notifyObservers(dpdVehicleChoice.getValue());
+        notifyObservers(DriveInEvent.DriveIn);
     }
 
     @FXML
     private ChoiceBox<VehicleType> dpdVehicleChoice;
+    public VehicleType GetSelectedVehicle() {
+        return dpdVehicleChoice.getValue();
+    }
 
     private ObservableList<VehicleType> vehicleTypesList = FXCollections.observableArrayList();
 
@@ -119,5 +127,24 @@ public class CheckInController extends SimpleObservable<VehicleType> {
             }
         });
 
+    }
+
+    @FXML
+    private ChoiceBox dpdStyle;
+
+    public void PopulateStyleDropDown() {
+        ObservableList<Uistyles> colors = FXCollections.observableArrayList(Uistyles.values());
+        dpdStyle.setItems(colors);
+    }
+
+    @FXML
+    private void OnBtnStylePressed(ActionEvent ignoredEvent) {
+        setChanged();
+        notifyObservers(DriveInEvent.StyleChanged);
+
+    }
+
+    public Uistyles GetSelectedStyle()  {
+        return (Uistyles) dpdStyle.getSelectionModel().getSelectedItem();
     }
 }
