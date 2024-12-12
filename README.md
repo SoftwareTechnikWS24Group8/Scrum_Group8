@@ -50,3 +50,10 @@ manual tests are fine if we make a protocol of it.
 ## Learned Lessions
 
 [Lessons learned]()
+
+## Definitions
+
+### Finish
+
+- A ticket has been reviewed and no major changes are needed.
+- Changed modules and functions have been manually tested.
