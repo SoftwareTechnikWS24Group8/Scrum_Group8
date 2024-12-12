@@ -53,7 +53,8 @@ manual tests are fine if we make a protocol of it.
 
 ## Definitions
 
-### Finish
+### Done
 
 - A ticket has been reviewed and no major changes are needed.
-- Changed modules and functions have been manually tested.
+- Changed modules and functions have been at least manually tested.
+- Has been merged successfully.
