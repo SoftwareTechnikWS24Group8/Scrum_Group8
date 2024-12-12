@@ -1,6 +1,7 @@
 package de.hse.swb8.parkingSystem.pay;
 
 
+import de.hse.swb8.parkingSystem.checkout.CheckOutCoreSystem;
 import de.hse.swb8.parkingSystem.core.DataBaseLogin;
 import de.hse.swb8.parkingSystem.core.Records.DataBaseInfo;
 import de.hse.swb8.parkingSystem.core.Records.VehicleType;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Dictionary;
 import java.util.Enumeration;
 
@@ -65,6 +67,7 @@ public class PayCoreSystem implements Observer<PayState> {
         } else {
             db.SetPayed(selectedVehicle.ticket_id(), selectedVehicle.priceInEuro());
             controller.SetInfoText("Ticket Bezahlt!");
+            TimeUntilStampOut(selectedVehicle.ticket_id());
         }
     }
 
@@ -101,5 +104,17 @@ public class PayCoreSystem implements Observer<PayState> {
 
         // Return the corresponding price, or null if no valid hour is found
         return highestHour != null ? prices.get(highestHour) : null;
+    }
+
+    public void TimeUntilStampOut(String ticket_id){
+        float time_after_payment = db.GetHoursBetweenStampFromTicketAndNow(ticket_id);
+        LocalDateTime currentTime = LocalDateTime.now();
+        int hours = (int) time_after_payment;
+        int minutes = (int) ((time_after_payment - hours) * 60);
+        currentTime.minusMinutes(minutes);
+        currentTime.plusMinutes((int) CheckOutCoreSystem.getTIME_AFTER_PAYMENT()*60);
+        int timeLeft = (int) CheckOutCoreSystem.getTIME_AFTER_PAYMENT()*60 - minutes;
+        controller.SetInfoText("Sie müssen bis um " + currentTime.getHour() + ":" + currentTime.getMinute() + " Uhr das Parkhaus verlassen haben. Noch " + timeLeft +" Minuten.");
+            
     }
 }
