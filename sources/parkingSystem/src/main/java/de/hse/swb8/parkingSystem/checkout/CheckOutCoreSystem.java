@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class CheckOutCoreSystem implements Observer<String> {
 
-    private static final float TIME_AFTER_PAYMENT = 0.17f; // ~10 Minunten
+    private static final String TIME_AFTER_PAYMENT = "TIME_AFTER_PAYMENT"; // ~10 Minunten
 
 
     CheckOutController controller;
@@ -58,7 +58,11 @@ public class CheckOutCoreSystem implements Observer<String> {
             if (db.HasTicketBeenPayed(ticketId)) {
                 float timer_after_payment = db.getHoursBetweenStampFromTicketAndNow(ticketId);
 
-                if (timer_after_payment > TIME_AFTER_PAYMENT) {
+                String result = db.GetSettingsFromKey("TIME_AFTER_PAYMENT");
+
+                float time_after_payment = Float.parseFloat(result);
+
+                if (timer_after_payment > time_after_payment) {
                     controller.SetInfoText("Zeit überschreitung zahle erneut");
                 } else {
                     controller.SetInfoText("Gute Fahrt!");

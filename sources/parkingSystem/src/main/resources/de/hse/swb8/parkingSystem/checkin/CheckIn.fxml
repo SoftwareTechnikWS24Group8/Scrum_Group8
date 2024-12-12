@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hse.swb8.parkingSystem.checkin.CheckInController">
     <children>
-        <Button fx:id="btnDriveIn" layoutX="501.0" layoutY="310.0" mnemonicParsing="false" onAction="#OnBtnDriveInPressed" prefHeight="98.0" prefWidth="240.0" text="EInfahren">
+        <Button fx:id="btnDriveIn" layoutX="501.0" layoutY="310.0" mnemonicParsing="false" onAction="#OnBtnDriveInPressed" prefHeight="98.0" prefWidth="240.0" text="Einfahren">
          <font>
             <Font size="22.0" />
          </font></Button>

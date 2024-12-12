@@ -27,6 +27,28 @@ public class DataBaseCore {
         connection = tryConnection;
     }
 
+    public String GetSettingsFromKey(String settings_key)
+    {
+        String settings = "";
+        String query = "SELECT * FROM scrum.settings WHERE settings_key = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            // Set the ticket_name parameter
+            preparedStatement.setString(1, settings_key);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Get the count from the result
+                    settings = resultSet.getString("settings_value");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error checking settings", e);
+        }
+        return settings;
+    }
+
     public VehicleType[] GetVehicleTypes() {
         List<VehicleType> vehicleTypes = new ArrayList<>();
         try {
