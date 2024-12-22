@@ -14,18 +14,24 @@ public class DataBaseCore {
     protected final Connection connection;
 
     public DataBaseCore(final @NotNull DataBaseInfo dbInfo) {
-        Connection tryConnection = null;
+        this(createConnection(dbInfo));
+    }
+
+    public DataBaseCore(Connection connection) {
+        this.connection = connection;
+    }
+
+    private static Connection createConnection(DataBaseInfo dbInfo) {
         if (!DataBaseCore.ValidateDataBaseInfo(dbInfo)) {
             throw new RuntimeException("Tried creating DataBase without valid Database");
         }
         try {
-            tryConnection = DriverManager.getConnection(dbInfo.url(), dbInfo.userName(), dbInfo.password());
+            return DriverManager.getConnection(dbInfo.url(), dbInfo.userName(), dbInfo.password());
         } catch (SQLException e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            throw new RuntimeException("Database connection error: " + e.getMessage(), e);
         }
-        connection = tryConnection;
     }
+
 
     public String GetSettingsFromKey(String settings_key)
     {
