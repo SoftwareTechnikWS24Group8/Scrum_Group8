@@ -29,6 +29,10 @@ public class PayCoreSystem implements Observer<PayState> {
         dblogin.LoginIntoDataBase(callback);
     }
 
+    public PayCoreSystem(PayDB payDB) {
+        db = payDB;
+    }
+
     private void StartUp(DataBaseInfo info) {
         db = new PayDB(info);
 
