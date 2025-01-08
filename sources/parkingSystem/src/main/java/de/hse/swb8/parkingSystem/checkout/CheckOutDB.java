@@ -12,6 +12,10 @@ public class CheckOutDB extends DataBaseCore {
         super(info);
     }
 
+    public CheckOutDB(Connection connection) {
+        super(connection);
+    }
+
     public boolean DoesTicketExistValid(String Ticket_id) {
         boolean isActive = false;
         String query = "SELECT COUNT(*) FROM scrum.park_list WHERE ticket_name = ? AND stamp_out_time IS NULL";
